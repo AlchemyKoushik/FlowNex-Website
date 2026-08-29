@@ -1,0 +1,6 @@
+.next/
+node_modules/
+Saved (via Browser)/
+.vscode/
+.DS_Store
+Thumbs.db

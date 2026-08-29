@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-black: #050507;
+  --color-pink: #ff2a6d;
+  --color-burgundy: #18030c;
+  --color-white: #ffffff;
+  --color-muted: #88889a;
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+html {
+  background-color: var(--color-black);
+  color: var(--color-white);
+  font-family: var(--font-jakarta), system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 42, 109, 0.3) #050507;
+}
+
+/* Lenis smooth scrolling rules */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* Text Selection */
+::selection {
+  background-color: var(--color-pink);
+  color: #ffffff;
+}
+
+/* Subtle background noise texture overlay */
+.bg-noise {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* Glassmorphism */
+.glass-panel {
+  background: rgba(11, 11, 18, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.glass-panel-pink {
+  background: rgba(24, 3, 12, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 42, 109, 0.2);
+}
+
+/* Text stroke outline */
+.text-outline {
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.25);
+  color: transparent;
+  transition: all 0.5s var(--ease-out-expo);
+}
+
+.text-outline:hover {
+  -webkit-text-stroke: 1.5px var(--color-pink);
+  color: transparent;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #050507;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 42, 109, 0.35);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-pink);
+}
+
+/* Animation Utilities */
+.transition-smooth {
+  transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
