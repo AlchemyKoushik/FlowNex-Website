@@ -15,9 +15,9 @@ export default function Footer() {
       // Lenis-style Parallax Wordmark Entrance & Scale
       gsap.fromTo(
         wordmarkRef.current,
-        { scale: 0.9, y: 40 },
+        { scale: 0.92, y: 30 },
         {
-          scale: 1.05,
+          scale: 1.04,
           y: 0,
           ease: "none",
           scrollTrigger: {
@@ -56,7 +56,7 @@ export default function Footer() {
         {/* Parallax Scaling Display Wordmark */}
         <h2
           ref={wordmarkRef}
-          className="font-headline text-[15vw] sm:text-[16vw] md:text-[14vw] leading-[0.8] font-extrabold uppercase text-flownex-white tracking-tighter select-none transition-transform"
+          className="font-logo text-[11vw] sm:text-[12vw] md:text-[10vw] leading-[0.8] font-[950] uppercase text-flownex-white tracking-[0.08em] select-none transition-transform"
         >
           FLOWNEX
         </h2>

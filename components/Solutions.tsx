@@ -68,11 +68,41 @@ export default function Solutions() {
       chapterEls.forEach((el, index) => {
         ScrollTrigger.create({
           trigger: el,
-          start: "top 45%",
-          end: "bottom 45%",
+          start: "top 50%",
+          end: "bottom 50%",
           onEnter: () => setActiveChapter(index),
           onEnterBack: () => setActiveChapter(index),
         });
+
+        // Unified scrubbed timeline for enter, rest, and exit
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: el,
+            start: "top 85%",
+            end: "bottom 15%",
+            scrub: true,
+          }
+        });
+
+        tl.fromTo(
+          el,
+          { opacity: 0, y: 120 },
+          { opacity: 1, y: 0, ease: "none", duration: 1 } // Entrance
+        )
+        .to(el, { opacity: 1, y: 0, duration: 1 }) // Resting state in center
+        .to(el, { opacity: 0, y: -120, ease: "none", duration: 1 }); // Exit
+      });
+
+      // Background Parallax
+      gsap.to(".solutions-bg-visual", {
+        yPercent: 30,
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        },
       });
     }, containerRef);
 
@@ -83,19 +113,22 @@ export default function Solutions() {
     <section
       ref={containerRef}
       id="solutions"
-      className="relative w-full bg-flownex-black text-flownex-white py-32 px-6 md:px-16 border-t border-white/10"
+      className="relative w-full bg-flownex-black text-flownex-white py-28 md:py-36 px-6 md:px-16 border-t border-white/10"
     >
-      <div className="max-w-[1500px] mx-auto">
-        {/* Two-Column Pinned Architecture (Matching Lenis 'WHY SMOOTH SCROLL?' Layout) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start relative">
-          {/* LEFT COLUMN: Fixed / Pinned Sticky Anchor */}
-          <div className="lg:col-span-5 sticky top-36 self-start space-y-8 py-2">
+      {/* Subtle Background Parallax Visual */}
+      <div className="solutions-bg-visual absolute top-[10%] right-[-5%] w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] bg-flownex-burgundy/20 rounded-full blur-[140px] pointer-events-none" />
+
+      <div className="max-w-[1500px] mx-auto relative z-10">
+        {/* Two-Column Layout (Matching Lenis 'WHY SMOOTH SCROLL?' Pinned Layout) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start relative">
+          {/* LEFT COLUMN: Pure CSS Sticky Anchor */}
+          <div className="lg:col-span-5 lg:sticky lg:top-[20vh] self-start space-y-8 py-2 z-10">
             {/* Lenis-Style Pink Border & Giant Stacked Display Title */}
             <div className="border-l-4 border-flownex-pink pl-6 sm:pl-8 py-1">
               <span className="font-body text-xs font-bold text-flownex-pink tracking-widest uppercase block mb-3">
                 02 / CORE CAPABILITIES
               </span>
-              <h2 className="font-headline text-6xl sm:text-7xl lg:text-8xl uppercase font-extrabold text-flownex-white tracking-tight leading-[0.88] select-none">
+              <h2 className="font-headline text-5xl sm:text-7xl lg:text-8xl uppercase font-extrabold text-flownex-white tracking-tight leading-[0.9] select-none">
                 WHAT<br />
                 WE<br />
                 DO?
@@ -104,16 +137,18 @@ export default function Solutions() {
 
             {/* Introductory Copy */}
             <p className="font-body text-base text-flownex-white/80 font-normal leading-relaxed max-w-md pt-2">
-              Every business has information, people and processes moving through it. When those things are scattered, work slows down. FlowNex connects them into systems that work together.
+              Every business has information, people and processes moving through it.
+              When those things are scattered, work slows down. FlowNex connects them into
+              systems that work together.
             </p>
 
             {/* Chapter Indicator Bar */}
-            <div className="pt-4 border-t border-white/10 space-y-3">
-              <div className="flex items-center justify-between font-body text-xs font-bold text-flownex-white/70">
+            <div className="pt-6 border-t border-white/10 space-y-3 max-w-md">
+              <div className="flex items-center justify-between font-body text-xs font-bold text-flownex-white/80">
                 <span className="text-flownex-pink font-bold">
                   0{activeChapter + 1} / 06
                 </span>
-                <span>{CHAPTERS[activeChapter].title}</span>
+                <span className="truncate ml-4">{CHAPTERS[activeChapter].title}</span>
               </div>
 
               {/* Progress Line */}
@@ -134,34 +169,32 @@ export default function Solutions() {
             </div>
           </div>
 
-          {/* RIGHT COLUMN: Scrolling Feature Blocks (Matching Lenis Layout) */}
-          <div className="lg:col-span-7 space-y-36 md:space-y-44 pt-4 lg:pt-16">
+          {/* RIGHT COLUMN: Scrolling Chapter Sequence */}
+          <div className="lg:col-span-7 pt-[15vh] lg:pt-[30vh] pb-[15vh] lg:pb-[30vh]">
             {CHAPTERS.map((chap, index) => {
               const isActive = index === activeChapter;
 
               return (
                 <div
                   key={chap.num}
-                  className={`chapter-block transition-all duration-700 space-y-6 ${
-                    isActive ? "opacity-100 translate-y-0" : "opacity-35 translate-y-4"
-                  }`}
+                  className="chapter-block min-h-[50vh] lg:min-h-[75vh] flex flex-col justify-center space-y-6"
                 >
                   {/* Chapter Label */}
                   <div className="font-body text-xs font-bold text-flownex-pink tracking-widest uppercase">
                     CHAPTER {chap.num} — {chap.tagline}
                   </div>
 
-                  {/* Wide Extended Pink Feature Heading (Matching Lenis 'CREATE MORE IMMERSIVE INTERFACES') */}
+                  {/* Chapter Title */}
                   <h3 className="font-wide text-2xl sm:text-4xl lg:text-5xl uppercase font-bold text-flownex-pink tracking-[0.08em] leading-tight">
                     {chap.title}
                   </h3>
 
-                  {/* High Readability Description Paragraph */}
+                  {/* Description Paragraph */}
                   <p className="font-body text-base sm:text-lg text-flownex-white/85 font-light leading-relaxed max-w-xl">
                     {chap.description}
                   </p>
 
-                  {/* Clean Fragment Badges */}
+                  {/* Fragment Badges */}
                   <div className="pt-2">
                     <div className="flex flex-wrap items-center gap-2.5">
                       {chap.elements.map((el, i) => (

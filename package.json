@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "clean": "powershell -Command \"Remove-Item -Recurse -Force .next -ErrorAction SilentlyContinue\"",
-    "dev": "node ./node_modules/next/dist/bin/next dev",
-    "build": "node ./node_modules/next/dist/bin/next build",
-    "start": "node ./node_modules/next/dist/bin/next start"
+    "clean": "node ./scripts/clean-build.mjs",
+    "predev": "npm run clean",
+    "dev": "cmd /c \"set NODE_PATH=%CD%\\node_modules&& node ./node_modules/next/dist/bin/next dev\"",
+    "build": "cmd /c \"set NODE_PATH=%CD%\\node_modules&& node ./node_modules/next/dist/bin/next build\"",
+    "start": "cmd /c \"set NODE_PATH=%CD%\\node_modules&& node ./node_modules/next/dist/bin/next start\""
   },
   "dependencies": {
     "clsx": "^2.1.1",

@@ -25,8 +25,9 @@ module.exports = {
       },
       fontFamily: {
         display: ["var(--font-syne)", "sans-serif"],
-        headline: ["var(--font-anton)", "sans-serif"],
-        wide: ["var(--font-outfit)", "var(--font-syne)", "sans-serif"],
+        headline: ["var(--font-syne)", "sans-serif"],
+        wide: ["var(--font-syne)", "sans-serif"],
+        logo: ["var(--font-rokiest)", "sans-serif"],
         body: ["var(--font-jakarta)", "sans-serif"],
       },
       animation: {
