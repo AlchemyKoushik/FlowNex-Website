@@ -1,6 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const STAGES = [
   {
@@ -41,32 +43,63 @@ const STAGES = [
 ];
 
 export default function Method() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
   const [activeStage, setActiveStage] = useState(0);
   const current = STAGES[activeStage];
 
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    const ctx = gsap.context(() => {
+      // Lenis-Style Line-by-Line Staggered Reveal on Headline
+      gsap.fromTo(
+        ".appear-line",
+        { y: "100%", opacity: 0 },
+        {
+          y: "0%",
+          opacity: 1,
+          duration: 1.1,
+          stagger: 0.15,
+          ease: "power4.out",
+          scrollTrigger: {
+            trigger: titleRef.current,
+            start: "top 80%",
+          },
+        }
+      );
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="w-full bg-flownex-darker py-32 px-6 md:px-16 border-t border-white/10 relative overflow-hidden">
-      {/* Subtle Ambient Red Glow */}
+    <section
+      ref={containerRef}
+      className="w-full bg-flownex-darker py-32 px-6 md:px-16 border-t border-white/10 relative overflow-hidden"
+    >
       <div className="absolute top-1/2 right-0 w-[50vw] h-[50vw] bg-flownex-burgundy/40 rounded-full blur-[160px] pointer-events-none" />
 
       <div className="max-w-[1400px] mx-auto relative z-10">
-        {/* Header Block */}
+        {/* Header Block with Staggered Line Reveals */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end border-b border-white/10 pb-12 gap-8">
           <div>
-            <span className="font-mono text-xs text-flownex-pink tracking-widest uppercase">
+            <span className="font-body text-xs text-flownex-pink font-bold tracking-widest uppercase">
               04 / OUR METHODOLOGY
             </span>
-            <h2 className="font-headline text-4xl sm:text-6xl lg:text-7xl uppercase font-bold text-flownex-white mt-2 leading-[0.9]">
-              HOW WE WORK
+            <h2
+              ref={titleRef}
+              className="font-headline text-4xl sm:text-6xl lg:text-7xl uppercase font-bold text-flownex-white mt-2 leading-[0.9] overflow-hidden"
+            >
+              <span className="appear-line block">HOW WE WORK</span>
             </h2>
           </div>
 
-          {/* Large Statement */}
-          <div className="max-w-xl text-left md:text-right">
-            <h3 className="font-headline text-2xl sm:text-3xl uppercase font-bold text-flownex-white leading-tight">
+          <div className="max-w-xl text-left md:text-right overflow-hidden">
+            <h3 className="appear-line font-headline text-2xl sm:text-3xl uppercase font-bold text-flownex-white leading-tight">
               WE DON&apos;T JUST ADD TOOLS.
             </h3>
-            <h3 className="font-headline text-2xl sm:text-3xl uppercase font-bold text-flownex-pink leading-tight mt-1">
+            <h3 className="appear-line font-headline text-2xl sm:text-3xl uppercase font-bold text-flownex-pink leading-tight mt-1">
               WE CONNECT HOW YOU WORK.
             </h3>
           </div>
@@ -74,7 +107,6 @@ export default function Method() {
 
         {/* 5 Stages Grid & Visual Transformation */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mt-16 items-center">
-          {/* Left Column: Stage Selector Cards */}
           <div className="lg:col-span-6 flex flex-col space-y-4">
             {STAGES.map((stage, idx) => {
               const isActive = idx === activeStage;
@@ -84,14 +116,14 @@ export default function Method() {
                   onClick={() => setActiveStage(idx)}
                   className={`p-6 rounded-2xl cursor-pointer transition-all duration-500 border ${
                     isActive
-                      ? "glass-panel-pink border-flownex-pink/60 translate-x-2"
+                      ? "glass-panel-pink border-flownex-pink/60 translate-x-2 shadow-[0_0_20px_rgba(255,42,109,0.2)]"
                       : "glass-panel border-white/5 hover:border-white/20"
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
                       <span
-                        className={`font-mono text-lg font-bold ${
+                        className={`font-headline text-2xl font-bold ${
                           isActive ? "text-flownex-pink" : "text-flownex-white/40"
                         }`}
                       >
@@ -106,7 +138,7 @@ export default function Method() {
                       </h4>
                     </div>
                     {isActive && (
-                      <span className="w-2 h-2 rounded-full bg-flownex-pink animate-pulse" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-flownex-pink animate-pulse" />
                     )}
                   </div>
                   <p
@@ -126,30 +158,25 @@ export default function Method() {
             })}
           </div>
 
-          {/* Right Column: Visual Stage Transformation */}
           <div className="lg:col-span-6 h-[460px] w-full rounded-2xl glass-panel-pink p-8 flex flex-col justify-between relative overflow-hidden border border-flownex-pink/30">
-            {/* Visual Top Status */}
-            <div className="flex items-center justify-between font-mono text-xs border-b border-white/10 pb-4">
-              <span className="text-flownex-white/60">
-                STAGE {current.num} // {current.name}
+            <div className="flex items-center justify-between font-body text-xs font-bold border-b border-white/10 pb-4">
+              <span className="text-flownex-white/70 uppercase">
+                STAGE {current.num} — {current.name}
               </span>
-              <span className="text-flownex-pink">[ {current.visual.toUpperCase()} SYSTEM ]</span>
+              <span className="text-flownex-pink font-bold uppercase">{current.visual} SYSTEM</span>
             </div>
 
-            {/* Dynamic Stage Diagram */}
             <div className="my-auto flex items-center justify-center relative">
               <MethodVisual visual={current.visual} />
             </div>
 
-            {/* Visual Bottom Footer */}
-            <div className="flex items-center justify-between font-mono text-[11px] text-flownex-white/40 pt-4 border-t border-white/5">
+            <div className="flex items-center justify-between font-body text-[11px] font-semibold text-flownex-white/50 pt-4 border-t border-white/5 uppercase">
               <span>FLOWNEX TRANSFORMATION METHOD</span>
               <span className="text-flownex-pink">STEP {activeStage + 1} OF 5</span>
             </div>
           </div>
         </div>
 
-        {/* Ending Statement */}
         <div className="mt-24 text-center border-t border-white/10 pt-16">
           <h3 className="font-headline text-3xl sm:text-5xl md:text-6xl uppercase font-extrabold text-flownex-white tracking-tight">
             BUILD SYSTEMS THAT KEEP MOVING.
@@ -163,7 +190,6 @@ export default function Method() {
   );
 }
 
-{/* Stage Visual Diagram Component */}
 function MethodVisual({ visual }: { visual: string }) {
   if (visual === "scattered") {
     return (
@@ -177,7 +203,8 @@ function MethodVisual({ visual }: { visual: string }) {
         ].map((item, i) => (
           <div
             key={i}
-            className={`absolute ${item.pos} px-3 py-1.5 rounded-lg glass-panel border border-white/10 font-mono text-xs text-flownex-white/60 animate-bounce duration-[3s]`}
+            className="absolute px-3 py-1.5 rounded-full glass-panel border border-white/10 font-body text-xs font-semibold text-flownex-white/70 animate-bounce duration-[3s]"
+            style={{ animationDelay: `${i * 0.3}s` }}
           >
             {item.label}
           </div>
@@ -192,9 +219,9 @@ function MethodVisual({ visual }: { visual: string }) {
         {["WORKSPACE A", "DATABASE B", "DEPT C", "WORKFLOW D"].map((group, i) => (
           <div
             key={i}
-            className="p-4 rounded-xl glass-panel border border-flownex-pink/40 flex flex-col justify-center text-center font-mono text-xs font-bold text-flownex-white"
+            className="p-4 rounded-xl glass-panel border border-flownex-pink/40 flex flex-col justify-center text-center font-body text-xs font-bold text-flownex-white"
           >
-            <span className="text-[10px] text-flownex-pink font-normal">GROUP 0{i + 1}</span>
+            <span className="text-[10px] text-flownex-pink font-normal uppercase">GROUP 0{i + 1}</span>
             {group}
           </div>
         ))}
@@ -211,7 +238,7 @@ function MethodVisual({ visual }: { visual: string }) {
           <line x1="144" y1="128" x2="60" y2="200" stroke="#ff2a6d" strokeWidth="2" />
           <line x1="144" y1="128" x2="220" y2="200" stroke="#ff2a6d" strokeWidth="2" />
         </svg>
-        <div className="z-10 w-20 h-20 rounded-full bg-flownex-burgundy border-2 border-flownex-pink flex items-center justify-center font-mono text-xs font-bold text-flownex-white shadow-[0_0_30px_rgba(255,42,109,0.5)]">
+        <div className="z-10 w-20 h-20 rounded-full bg-flownex-burgundy border-2 border-flownex-pink flex items-center justify-center font-body text-xs font-bold text-flownex-white shadow-[0_0_30px_rgba(255,42,109,0.5)]">
           HUB
         </div>
       </div>
@@ -222,27 +249,25 @@ function MethodVisual({ visual }: { visual: string }) {
     return (
       <div className="flex flex-col items-center gap-4">
         <div className="flex items-center gap-3">
-          <span className="px-3 py-2 rounded-lg glass-panel font-mono text-xs text-flownex-white">INPUT</span>
+          <span className="px-3.5 py-2 rounded-full glass-panel font-body text-xs text-flownex-white font-bold">INPUT</span>
           <span className="text-flownex-pink font-bold">→</span>
-          <span className="px-4 py-2 rounded-lg bg-flownex-burgundy border border-flownex-pink font-mono text-xs font-bold text-flownex-pink animate-pulse">
+          <span className="px-4 py-2 rounded-full bg-flownex-burgundy border border-flownex-pink font-body text-xs font-bold text-flownex-pink animate-pulse">
             AUTO TRIGGER
           </span>
           <span className="text-flownex-pink font-bold">→</span>
-          <span className="px-3 py-2 rounded-lg glass-panel font-mono text-xs text-flownex-white">OUTPUT</span>
+          <span className="px-3.5 py-2 rounded-full glass-panel font-body text-xs text-flownex-white font-bold">OUTPUT</span>
         </div>
-        <span className="font-mono text-[10px] text-flownex-white/50">ZERO MANUAL LATENCY</span>
+        <span className="font-body text-[11px] font-bold text-flownex-white/50 tracking-wider">ZERO MANUAL LATENCY</span>
       </div>
     );
   }
 
-  // Evolving
   return (
     <div className="relative flex items-center justify-center">
       <div className="w-48 h-48 rounded-full border border-flownex-pink/40 animate-ping duration-[4s]" />
-      <div className="absolute w-32 h-32 rounded-full border border-white/20 flex items-center justify-center font-mono text-xs font-bold text-flownex-white">
+      <div className="absolute w-32 h-32 rounded-full border border-white/20 flex items-center justify-center font-body text-xs font-bold text-flownex-white uppercase">
         SCALABLE OS
       </div>
     </div>
   );
 }
-

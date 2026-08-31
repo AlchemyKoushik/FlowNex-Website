@@ -58,16 +58,16 @@ export default function Transformation() {
 
         {/* Section Header */}
         <div className="relative z-10 text-center max-w-4xl mx-auto border-b border-white/10 pb-6 w-full">
-          <span className="font-mono text-xs text-flownex-pink tracking-widest uppercase">
+          <span className="font-body text-xs text-flownex-pink font-bold tracking-widest uppercase">
             03 / THE TRANSFORMATION
           </span>
-          <h2 className="font-headline text-3xl sm:text-5xl md:text-6xl uppercase font-extrabold text-flownex-white mt-1 tracking-tight">
+          <h2 className="font-headline text-3xl sm:text-5xl md:text-6xl uppercase font-extrabold text-flownex-white mt-2 tracking-tight">
             FROM DISCONNECTED TO CONNECTED.
           </h2>
-          <div className="flex items-center justify-center gap-4 mt-3">
-            <span className="font-mono text-xs text-flownex-white/50">SYSTEM STATE:</span>
-            <span className="font-mono text-xs font-bold text-flownex-pink uppercase tracking-widest px-3 py-1 rounded bg-flownex-pink/10 border border-flownex-pink/30">
-              [ {progressState} ]
+          <div className="flex items-center justify-center gap-3 mt-4">
+            <span className="font-body text-xs font-semibold text-flownex-white/60">SYSTEM STATE:</span>
+            <span className="font-body text-xs font-bold text-flownex-pink uppercase tracking-widest px-4 py-1.5 rounded-full bg-flownex-pink/10 border border-flownex-pink/30">
+              {progressState}
             </span>
           </div>
         </div>
@@ -120,7 +120,7 @@ export default function Transformation() {
             <span className="font-headline text-lg md:text-xl font-bold uppercase text-flownex-white tracking-wider">
               FLOWNEX
             </span>
-            <span className="font-mono text-[9px] text-flownex-pink font-semibold mt-1">
+            <span className="font-body text-[10px] text-flownex-pink font-bold uppercase mt-1">
               CORE OS
             </span>
           </div>
@@ -136,7 +136,7 @@ export default function Transformation() {
                 style={{
                   transform: `translate(${currentX}px, ${currentY}px)`,
                 }}
-                className={`absolute px-4 py-2.5 rounded-xl font-mono text-xs flex items-center gap-2 border shadow-2xl transition-colors duration-500 ${
+                className={`absolute px-4 py-2.5 rounded-full font-body text-xs flex items-center gap-2 border shadow-2xl transition-colors duration-500 ${
                   scrollProgress > 0.5
                     ? "glass-panel-pink border-flownex-pink/50 text-flownex-white"
                     : "glass-panel border-white/10 text-flownex-white/60"
@@ -157,7 +157,7 @@ export default function Transformation() {
           <h3 className="font-headline text-2xl md:text-4xl uppercase font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-flownex-pink to-white tracking-wider">
             ONE CONNECTED SYSTEM.
           </h3>
-          <p className="font-mono text-xs text-flownex-white/50 tracking-widest uppercase mt-2">
+          <p className="font-body text-xs text-flownex-white/60 font-bold tracking-widest uppercase mt-2">
             NO SCATTERED FILES / NO ISOLATED WORKFLOWS / NO SILOED DATA
           </p>
         </div>
@@ -165,4 +165,3 @@ export default function Transformation() {
     </section>
   );
 }
-

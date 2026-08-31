@@ -1,9 +1,11 @@
+@import "lenis/dist/lenis.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --color-black: #050507;
+  --color-black: #030305;
   --color-pink: #ff2a6d;
   --color-burgundy: #18030c;
   --color-white: #ffffff;
@@ -16,30 +18,8 @@ html {
   background-color: var(--color-black);
   color: var(--color-white);
   font-family: var(--font-jakarta), system-ui, -apple-system, sans-serif;
-  overflow-x: hidden;
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 42, 109, 0.3) #050507;
-}
-
-/* Lenis smooth scrolling rules */
-html.lenis, html.lenis body {
-  height: auto;
-}
-
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-
-.lenis.lenis-stopped {
-  overflow: hidden;
-}
-
-.lenis.lenis-smooth iframe {
-  pointer-events: none;
+  scrollbar-color: rgba(255, 42, 109, 0.3) #030305;
 }
 
 /* Text Selection */
@@ -50,7 +30,7 @@ html.lenis, html.lenis body {
 
 /* Subtle background noise texture overlay */
 .bg-noise {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 0);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 0);
   background-size: 24px 24px;
 }
 
@@ -69,24 +49,12 @@ html.lenis, html.lenis body {
   border: 1px solid rgba(255, 42, 109, 0.2);
 }
 
-/* Text stroke outline */
-.text-outline {
-  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.25);
-  color: transparent;
-  transition: all 0.5s var(--ease-out-expo);
-}
-
-.text-outline:hover {
-  -webkit-text-stroke: 1.5px var(--color-pink);
-  color: transparent;
-}
-
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #050507;
+  background: #030305;
 }
 ::-webkit-scrollbar-thumb {
   background: rgba(255, 42, 109, 0.35);
@@ -96,8 +64,31 @@ html.lenis, html.lenis body {
   background: var(--color-pink);
 }
 
-/* Animation Utilities */
-.transition-smooth {
-  transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+/* Intro Reveal Animations */
+@keyframes introSlideUp {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
+@keyframes introWrapperOut {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+.animate-intro-slide {
+  animation: introSlideUp 1.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+}
+
+.animate-intro-out {
+  animation: introWrapperOut 1.4s cubic-bezier(0.19, 1, 0.22, 1) 1.2s forwards;
+}

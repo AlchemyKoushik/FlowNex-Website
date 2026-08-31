@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Syne, Anton, Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
+import { Syne, Anton, Plus_Jakarta_Sans, Outfit } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 
@@ -22,14 +22,14 @@ const jakarta = Plus_Jakarta_Sans({
   display: "swap",
 });
 
-const mono = JetBrains_Mono({
+const outfit = Outfit({
   subsets: ["latin"],
-  variable: "--font-mono",
+  variable: "--font-outfit",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "FlowNex Solutions - Creative Business Technology Studio",
+  title: "FlowNex Solutions — Creative Business Technology Studio",
   description:
     "FlowNex connects scattered business information, communication, data, and processes into structured, automated digital systems that flow.",
 };
@@ -42,9 +42,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${syne.variable} ${anton.variable} ${jakarta.variable} ${mono.variable} dark`}
+      suppressHydrationWarning
+      className={`${syne.variable} ${anton.variable} ${jakarta.variable} ${outfit.variable} dark`}
     >
-      <body className="bg-flownex-black text-flownex-white antialiased selection:bg-flownex-pink selection:text-white overflow-x-hidden min-h-screen">
+      <body
+        suppressHydrationWarning
+        className="bg-flownex-black text-flownex-white antialiased selection:bg-flownex-pink selection:text-white min-h-screen"
+      >
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>

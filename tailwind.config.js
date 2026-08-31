@@ -8,7 +8,7 @@ module.exports = {
     extend: {
       colors: {
         flownex: {
-          black: "#050507",
+          black: "#030305",
           darker: "#020203",
           card: "#0b0b12",
           burgundy: "#18030c",
@@ -26,8 +26,8 @@ module.exports = {
       fontFamily: {
         display: ["var(--font-syne)", "sans-serif"],
         headline: ["var(--font-anton)", "sans-serif"],
+        wide: ["var(--font-outfit)", "var(--font-syne)", "sans-serif"],
         body: ["var(--font-jakarta)", "sans-serif"],
-        mono: ["var(--font-mono)", "monospace"],
       },
       animation: {
         "pulse-glow": "pulseGlow 8s ease-in-out infinite alternate",
@@ -47,4 +47,3 @@ module.exports = {
   },
   plugins: [],
 };
-

@@ -2,38 +2,96 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const introWrapperRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
   const solutionsRef = useRef<HTMLDivElement>(null);
-  const introRef = useRef<HTMLDivElement>(null);
-  const [introDone, setIntroDone] = useState(false);
+  const glowRef = useRef<HTMLDivElement>(null);
+  const [isIntroComplete, setIsIntroComplete] = useState(false);
 
   useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        onComplete: () => setIntroDone(true),
+      // Step 1: Staggered Intro Reveal Sequence
+      const introTl = gsap.timeline({
+        onComplete: () => setIsIntroComplete(true),
       });
 
-      // Opening Choreography Sequence (Intro SVG reveal -> Hero settlement)
-      tl.fromTo(
-        introRef.current,
-        { scale: 1.1, opacity: 1 },
-        { scale: 1, opacity: 0, duration: 1.2, ease: "power3.inOut", delay: 0.4 }
-      )
+      introTl
+        .fromTo(
+          ".intro-letter",
+          { y: "100%", opacity: 0 },
+          {
+            y: "0%",
+            opacity: 1,
+            duration: 0.9,
+            stagger: 0.06,
+            ease: "power4.out",
+            delay: 0.1,
+          }
+        )
+        .to(
+          introWrapperRef.current,
+          {
+            y: "-100%",
+            duration: 1.2,
+            ease: "power4.inOut",
+          },
+          "+=0.15"
+        )
         .fromTo(
           titleRef.current,
-          { y: 120, opacity: 0, scale: 0.94 },
-          { y: 0, opacity: 1, scale: 1, duration: 1.4, ease: "power4.out" },
-          "-=0.6"
+          { y: 60, opacity: 0 },
+          { y: 0, opacity: 1, duration: 1.2, ease: "power4.out" },
+          "-=0.8"
         )
         .fromTo(
           solutionsRef.current,
-          { y: 40, opacity: 0 },
-          { y: 0, opacity: 1, duration: 1.1, ease: "power3.out" },
-          "-=0.8"
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, duration: 1.0, ease: "power3.out" },
+          "-=0.6"
         );
+
+      // Step 2: Lenis-Style Parallax Scroll Effect on Hero Typography
+      gsap.to(titleRef.current, {
+        y: 120,
+        opacity: 0.25,
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+
+      gsap.to(solutionsRef.current, {
+        y: 70,
+        opacity: 0.4,
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+
+      gsap.to(glowRef.current, {
+        scale: 1.25,
+        opacity: 0.2,
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
     }, containerRef);
 
     return () => ctx.revert();
@@ -42,120 +100,118 @@ export default function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full h-screen min-h-[720px] flex flex-col justify-between px-6 md:px-16 pt-24 pb-10 bg-flownex-black overflow-hidden select-none"
+      className="relative w-full h-screen min-h-[760px] flex flex-col justify-between px-6 md:px-16 pt-28 pb-12 bg-flownex-black overflow-hidden select-none"
     >
-      {/* Starting / Loading Choreography Overlay */}
-      <div
-        ref={introRef}
-        className={`fixed inset-0 z-50 bg-flownex-black flex flex-col items-center justify-center pointer-events-none transition-all duration-700 ${
-          introDone ? "hidden" : "block"
-        }`}
-      >
-        <div className="flex flex-col items-center gap-4">
-          <svg
-            width="80"
-            height="80"
-            viewBox="0 0 100 100"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="animate-pulse"
-          >
-            <circle cx="50" cy="50" r="45" stroke="#ff2a6d" strokeWidth="2" strokeDasharray="10 15" />
-            <path
-              d="M30 70 L70 30 M70 30 H40 M70 30 V60"
-              stroke="#ffffff"
-              strokeWidth="4"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          <span className="font-headline text-3xl tracking-widest text-flownex-white font-extrabold uppercase">
-            FLOWNEX
-          </span>
-          <span className="font-mono text-[10px] tracking-[0.3em] text-flownex-pink uppercase">
-            SYSTEM INITIALIZING
-          </span>
+      {/* 1. LENIS-STYLE OPENING INTRO CURTAIN */}
+      {!isIntroComplete && (
+        <div
+          ref={introWrapperRef}
+          className="fixed inset-0 z-50 bg-flownex-pink text-black flex flex-col justify-between p-8 md:p-16 pointer-events-none"
+        >
+          <div className="flex items-center justify-between font-body text-xs font-bold uppercase tracking-widest text-black/80">
+            <span>FLOWNEX SOLUTIONS</span>
+            <span>CREATIVE STUDIO</span>
+          </div>
+
+          <div className="my-auto overflow-hidden text-center">
+            <div className="flex items-center justify-center font-headline text-[18vw] sm:text-[20vw] leading-none tracking-tight uppercase font-bold text-black">
+              {"FLOWNEX".split("").map((char, index) => (
+                <span key={index} className="intro-letter inline-block">
+                  {char}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex justify-between items-end font-body text-xs font-bold uppercase tracking-widest text-black/80">
+            <span>BUSINESS SYSTEMS & PROCESS AUTOMATION</span>
+            <span>01 / 06</span>
+          </div>
         </div>
-      </div>
+      )}
 
-      {/* Hero Background Atmosphere & Subtle Depth */}
+      {/* 2. HERO BACKGROUND ATMOSPHERE WITH SCRUBBABLE PARALLAX */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Soft Atmospheric Glows */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] h-[55vw] max-w-[1200px] bg-radial from-flownex-burgundy/60 via-flownex-red/20 to-transparent blur-[160px] opacity-80" />
-        <div className="absolute top-1/4 right-1/4 w-[40vw] h-[40vw] bg-flownex-pink/10 rounded-full blur-[140px] animate-pulse-glow" />
-
-        {/* Subtle Grain Texture */}
+        <div
+          ref={glowRef}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] h-[55vw] max-w-[1300px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-flownex-burgundy via-flownex-red/20 to-transparent blur-[160px] opacity-80 transition-transform"
+        />
+        <div className="absolute top-1/3 right-1/4 w-[35vw] h-[35vw] bg-flownex-pink/10 rounded-full blur-[140px] animate-pulse-glow" />
         <div className="absolute inset-0 bg-noise opacity-30" />
 
-        {/* Subtle Flowing Form SVG Lines */}
         <svg
-          className="absolute inset-0 w-full h-full opacity-25"
+          className="absolute inset-0 w-full h-full opacity-20"
           viewBox="0 0 1440 900"
           fill="none"
         >
           <path
-            d="M -100 300 Q 400 100 800 500 T 1700 200"
-            stroke="url(#hero-flow-grad)"
+            d="M -100 320 Q 400 120 850 520 T 1700 220"
+            stroke="url(#hero-pink-gradient)"
             strokeWidth="1.5"
-            strokeDasharray="4 8"
+            strokeDasharray="6 10"
           />
           <path
-            d="M -50 700 Q 500 850 1000 300 T 1600 600"
-            stroke="rgba(255,42,109,0.15)"
+            d="M -50 680 Q 550 820 1050 280 T 1600 580"
+            stroke="rgba(255,42,109,0.12)"
             strokeWidth="1"
           />
           <defs>
-            <linearGradient id="hero-flow-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <linearGradient id="hero-pink-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#ff2a6d" stopOpacity="0.8" />
               <stop offset="100%" stopColor="#18030c" stopOpacity="0" />
             </linearGradient>
           </defs>
         </svg>
-
-        {/* Delicate Star / Particle Accent Overlay */}
-        <div className="absolute top-1/3 left-1/5 w-1 h-1 rounded-full bg-white opacity-40 animate-ping" />
-        <div className="absolute top-2/3 right-1/4 w-1.5 h-1.5 rounded-full bg-flownex-pink opacity-50" />
       </div>
 
-      {/* Hero Typography Composition */}
-      <div className="relative z-10 my-auto flex flex-col justify-center max-w-[1500px] w-full mx-auto">
-        {/* Massive Editorial Display Wordmark */}
-        <div ref={titleRef} className="overflow-hidden">
-          <h1 className="font-headline text-[21vw] sm:text-[22vw] md:text-[20vw] lg:text-[18.5vw] leading-[0.8] tracking-tighter uppercase font-extrabold text-flownex-white select-none text-left">
+      {/* 3. HERO TYPOGRAPHY COMPOSITION — WITH PARALLAX SCROLL DISPLACEMENT */}
+      <div className="relative z-10 my-auto flex flex-col justify-center max-w-[1500px] w-full mx-auto py-4">
+        <div ref={titleRef} className="py-2 overflow-visible">
+          <h1 className="font-headline text-[18vw] sm:text-[19vw] lg:text-[17vw] leading-[0.95] tracking-tight uppercase font-extrabold text-flownex-pink select-none text-left drop-shadow-[0_10px_30px_rgba(255,42,109,0.2)]">
             FLOWNEX
           </h1>
         </div>
 
-        {/* Secondary Editorial Phrase 'SOLUTIONS' Positioned Independently */}
         <div
           ref={solutionsRef}
-          className="flex flex-col md:flex-row md:items-baseline justify-between mt-2 md:-mt-6 lg:-mt-10 px-2"
+          className="flex flex-col md:flex-row items-baseline justify-end mt-4 md:mt-2 pr-2"
         >
-          <div className="font-headline text-[11vw] sm:text-[12vw] md:text-[10vw] lg:text-[8.5vw] leading-[0.85] tracking-tight uppercase font-bold text-flownex-pink">
+          <div className="font-wide text-[7.5vw] sm:text-[8.5vw] lg:text-[7.5vw] leading-none tracking-[0.14em] uppercase font-black text-flownex-white text-right">
             SOLUTIONS
           </div>
-
-          <p className="max-w-md mt-6 md:mt-0 font-body text-xs sm:text-sm md:text-base leading-relaxed text-flownex-white/70 font-light border-l border-flownex-pink/40 pl-4">
-            A creative technology studio connecting business information, communication, data, and workflows into fluid, structured operating systems.
-          </p>
         </div>
       </div>
 
-      {/* Hero Lower Informational Bar */}
-      <div className="relative z-10 w-full max-w-[1500px] mx-auto flex items-end justify-between border-t border-white/10 pt-5">
-        {/* LEFT: Scroll to explore with subtle vertical line */}
-        <div className="flex items-center gap-4">
-          <div className="w-[1px] h-8 bg-gradient-to-b from-flownex-pink to-transparent animate-pulse" />
-          <div className="font-mono text-[10px] md:text-[11px] uppercase tracking-widest text-flownex-white/70">
+      {/* 4. HERO LOWER INFORMATIONAL & CTA BAR */}
+      <div className="relative z-10 w-full max-w-[1500px] mx-auto grid grid-cols-1 md:grid-cols-12 items-end justify-between border-t border-white/10 pt-6 gap-6">
+        <div className="md:col-span-3 flex items-center gap-4">
+          <div className="w-[2px] h-9 bg-flownex-pink" />
+          <div className="font-body text-xs uppercase font-bold tracking-widest text-flownex-white">
             <div>SCROLL</div>
-            <div className="text-flownex-pink font-semibold">TO EXPLORE</div>
+            <div>TO EXPLORE</div>
           </div>
         </div>
 
-        {/* RIGHT: Minimal Directional Element */}
-        <div className="flex items-center gap-2 font-mono text-[10px] md:text-[11px] uppercase tracking-widest text-flownex-white/80">
-          <span>SOLUTIONS</span>
-          <span className="text-flownex-pink font-bold">↓</span>
+        <div className="md:col-span-5 font-body text-xs md:text-sm text-flownex-white/70 font-normal tracking-wide uppercase leading-relaxed">
+          <p>A CREATIVE TECHNOLOGY STUDIO CONNECTING BUSINESS INFORMATION, DATA, AND WORKFLOWS INTO FLUID OPERATING SYSTEMS.</p>
+        </div>
+
+        <div className="md:col-span-4 flex items-center justify-start md:justify-end gap-3">
+          <a
+            href="#contact"
+            onClick={(e) => e.preventDefault()}
+            className="px-6 py-3 rounded-full bg-flownex-pink text-white font-body text-xs font-bold uppercase tracking-wider hover:bg-flownex-pink-light transition-all shadow-[0_0_25px_rgba(255,42,109,0.35)] flex items-center gap-2"
+          >
+            <span>LET&apos;S DISCUSS</span>
+            <span>↗</span>
+          </a>
+          <a
+            href="#solutions"
+            className="px-6 py-3 rounded-full bg-white/10 border border-white/15 text-white font-body text-xs font-bold uppercase tracking-wider hover:bg-white/20 transition-all flex items-center gap-2"
+          >
+            <span>SOLUTIONS</span>
+            <span>↓</span>
+          </a>
         </div>
       </div>
     </section>
