@@ -16,19 +16,19 @@ const rokiest = localFont({
     { path: "./fonts/rokiest/Rokiest-Extrablack.otf", weight: "950", style: "normal" },
   ],
   variable: "--font-rokiest",
-  display: "swap",
+  display: "block",
 });
 
 const syne = Syne({
   subsets: ["latin"],
   variable: "--font-syne",
-  display: "swap",
+  display: "block",
 });
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-jakarta",
-  display: "swap",
+  display: "block",
 });
 
 export const metadata: Metadata = {

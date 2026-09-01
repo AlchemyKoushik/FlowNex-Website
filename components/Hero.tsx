@@ -1,91 +1,69 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function Hero() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const introWrapperRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
   const compositionRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const solutionsRef = useRef<HTMLDivElement>(null);
-  const lowerBarRef = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
+  const introWrapperRef = useRef<HTMLDivElement>(null);
 
-  const [isIntroActive, setIsIntroActive] = useState(true);
-  const [isFontLoaded, setIsFontLoaded] = useState(false);
-  const [isIntroShown, setIsIntroShown] = useState(false);
-  const [isCurtainOut, setIsCurtainOut] = useState(false);
-
-  // 1. Font Readiness Guard
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const checkFonts = async () => {
-      try {
-        if ("fonts" in document) {
-          await document.fonts.ready;
-        }
-      } catch (err) {
-        console.warn("Font loading check fallback", err);
-      } finally {
-        setIsFontLoaded(true);
-      }
-    };
-
-    checkFonts();
-  }, []);
-
-  // 2. Lenis.dev Replicated Intro State Machine
-  useEffect(() => {
-    if (typeof window === "undefined" || !isFontLoaded) return;
-
-    // Lock scroll during intro
-    if (window.__stopScroll) {
-      window.__stopScroll();
-    }
-
-    // Step A: Trigger letterform assembly transition
-    const showTimer = setTimeout(() => {
-      setIsIntroShown(true);
-    }, 100);
-
-    // Step B: Trigger curtain vertical slide out AND Hero elements reveal
-    const outTimer = setTimeout(() => {
-      setIsCurtainOut(true);
-    }, 1450);
-
-    return () => {
-      clearTimeout(showTimer);
-      clearTimeout(outTimer);
-    };
-  }, [isFontLoaded]);
-
-  // 3. Handle Curtain Exit Completion
-  const handleCurtainTransitionEnd = (e: React.TransitionEvent<HTMLDivElement>) => {
-    if (e.target !== introWrapperRef.current) return;
-
-    setIsIntroActive(false);
-
-    if (window.__startScroll) {
-      window.__startScroll();
-    }
-
-    if (typeof window !== "undefined") {
-      ScrollTrigger.refresh();
-    }
-  };
-
-  // 4. Lenis Parallax Scroll Scrubbing for Hero Elements
-  useEffect(() => {
-    if (typeof window === "undefined" || isIntroActive) return;
-
     gsap.registerPlugin(ScrollTrigger);
 
+    // 1. STATE: INTRO_WRAPPER (LOCK SCROLLING)
+    // Force scroll to top instantly
+    window.scrollTo(0, 0);
+    document.body.style.overflow = "hidden";
+
+    // Since Hero (child) mounts before SmoothScroll (parent), __stopScroll might not exist yet.
+    // We poll briefly to ensure Lenis is completely paused as soon as it initializes.
+    const stopLenisInterval = setInterval(() => {
+      if (window.__stopScroll) {
+        window.__stopScroll();
+        clearInterval(stopLenisInterval);
+      }
+    }, 10);
+
     const ctx = gsap.context(() => {
-      if (compositionRef.current && containerRef.current) {
-        gsap.fromTo(compositionRef.current,
+      // 2. STATE: WRAPPER_AUTO_ANIMATION & HERO_REVEAL
+      const revealTl = gsap.timeline({
+        delay: 0.2, // Slight delay to let the page settle before animating
+        onComplete: () => {
+          // 3. STATE: HERO_ACTIVE & NORMAL_SCROLL_ENABLED
+          clearInterval(stopLenisInterval);
+          
+          if (window.__startScroll) {
+            window.__startScroll();
+          } else {
+            document.body.style.overflow = "";
+          }
+
+          // Completely remove wrapper from flow to prevent any interaction or reappearance
+          gsap.set(introWrapperRef.current, { display: "none" });
+
+          // Refresh ScrollTrigger so parallax calculations are perfectly accurate
+          ScrollTrigger.refresh();
+        },
+      });
+
+      // Animate clip path upwards (bottom edge moves up), revealing Hero underneath
+      revealTl.to(introWrapperRef.current, {
+        clipPath: "inset(0% 0% 100% 0%)",
+        duration: 1.4,
+        ease: "power3.inOut",
+      });
+
+      // 4. PARALLAX EFFECTS (Normal scroll-driven behavior after intro)
+      // These are completely independent of the intro and will only respond to scroll 
+      // once Lenis and the body overflow are restored.
+      if (compositionRef.current) {
+        gsap.fromTo(
+          compositionRef.current,
           { y: 0 },
           {
             y: 90,
@@ -100,11 +78,13 @@ export default function Hero() {
         );
       }
 
-      if (glowRef.current && containerRef.current) {
-        gsap.fromTo(glowRef.current,
+      if (glowRef.current) {
+        gsap.fromTo(
+          glowRef.current,
           { xPercent: -50, yPercent: -50, scale: 1, opacity: 0.8 },
           {
-            xPercent: -50, yPercent: -50,
+            xPercent: -50,
+            yPercent: -50,
             scale: 1.3,
             opacity: 0.2,
             ease: "none",
@@ -119,8 +99,18 @@ export default function Hero() {
       }
     }, containerRef);
 
-    return () => ctx.revert();
-  }, [isIntroActive]);
+    return () => {
+      clearInterval(stopLenisInterval);
+      ctx.revert();
+      
+      // Cleanup: restore scroll if component unmounts
+      if (window.__startScroll) {
+        window.__startScroll();
+      } else {
+        document.body.style.overflow = "";
+      }
+    };
+  }, []);
 
   return (
     <section
@@ -170,19 +160,11 @@ export default function Hero() {
         {/* Main Hero Wordmark Composition */}
         <div className="relative z-10 my-auto flex flex-col items-center justify-center w-full mx-auto py-2 pointer-events-auto">
           <div ref={compositionRef} className="flex flex-col w-fit">
-            <h1
-              ref={titleRef}
-              className={`font-logo text-[13vw] sm:text-[14vw] lg:text-[13vw] leading-[0.95] tracking-[0.08em] uppercase font-[950] text-flownex-pink select-none text-center drop-shadow-[0_10px_30px_rgba(255,42,109,0.2)] ${isIntroActive ? "hero-reveal-element" : ""} ${isCurtainOut ? "show" : ""}`}
-              style={{ transitionDelay: "0.05s" }}
-            >
+            <h1 className="font-logo text-[13vw] sm:text-[14vw] lg:text-[13vw] leading-[0.95] tracking-[0.08em] uppercase font-[950] text-flownex-pink select-none text-center drop-shadow-[0_10px_30px_rgba(255,42,109,0.2)]">
               FLOWNEX
             </h1>
 
-            <div
-              ref={solutionsRef}
-              className={`flex justify-end mt-4 sm:mt-6 ${isIntroActive ? "hero-reveal-element" : ""} ${isCurtainOut ? "show" : ""}`}
-              style={{ transitionDelay: "0.15s" }}
-            >
+            <div className="flex justify-end mt-4 sm:mt-6">
               <span className="font-wide text-[5vw] sm:text-[5.5vw] lg:text-[5vw] leading-none tracking-[0.1em] uppercase font-bold text-flownex-white text-right select-none">
                 SOLUTIONS
               </span>
@@ -191,11 +173,7 @@ export default function Hero() {
         </div>
 
         {/* HERO LOWER INFORMATIONAL & CTA BAR */}
-        <div
-          ref={lowerBarRef}
-          className={`relative z-10 w-full max-w-[1550px] mx-auto grid grid-cols-1 md:grid-cols-12 items-end justify-between border-t border-white/10 pt-5 gap-4 pointer-events-auto ${isIntroActive ? "hero-reveal-element" : ""} ${isCurtainOut ? "show" : ""}`}
-          style={{ transitionDelay: "0.25s" }}
-        >
+        <div className="relative z-10 w-full max-w-[1550px] mx-auto grid grid-cols-1 md:grid-cols-12 items-end justify-between border-t border-white/10 pt-5 gap-4 pointer-events-auto">
           <div className="md:col-span-3 flex items-center gap-3">
             <div className="w-[2px] h-8 bg-flownex-pink" />
             <div className="font-body text-xs uppercase font-bold tracking-widest text-flownex-white">
@@ -212,44 +190,47 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* 1. LENIS.DEV REPLICATED PINK INTRO CURTAIN (WRAPPER LAYER) */}
-      {isIntroActive && (
-        <div
-          ref={introWrapperRef}
-          id="intro-curtain"
-          onTransitionEnd={handleCurtainTransitionEnd}
-          className={`absolute inset-0 z-50 bg-flownex-pink flex flex-col justify-between px-4 sm:px-8 md:px-14 pt-24 pb-10 transition-transform duration-[1.1s] ease-[cubic-bezier(0.19,1,0.22,1)] ${isCurtainOut ? "-translate-y-full" : "translate-y-0"}`}
-        >
-          {/* Top Metadata Header */}
-          <div className="flex items-center justify-between font-body text-xs font-bold uppercase tracking-widest text-black/80 h-4">
-            <span className="flex items-center gap-2 opacity-0 invisible w-[160px]"></span>
-            <span className="opacity-0 invisible">CREATIVE STUDIO</span>
-          </div>
+      {/* 1. WRAPPER LAYER (ANIMATED CLIP-PATH REVEAL) */}
+      <div
+        ref={introWrapperRef}
+        className="absolute inset-0 z-50 bg-flownex-pink flex flex-col justify-between px-4 sm:px-8 md:px-14 pt-24 pb-10 pointer-events-none"
+        style={{ clipPath: "inset(0% 0% 0% 0%)" }}
+      >
+        {/* Placeholder to match the Hero's top layout */}
+        <div className="h-4" />
 
-          {/* Central Oversized Wordmark sharing EXACT SAME context */}
-          <div className="my-auto w-full mx-auto flex flex-col items-center justify-center py-2">
-            <div className="flex flex-col w-fit">
-              <div className="font-logo text-[13vw] sm:text-[14vw] lg:text-[13vw] leading-[0.95] tracking-[0.08em] uppercase font-[950] text-flownex-black select-none text-center drop-shadow-[0_8px_24px_rgba(0,0,0,0.18)]">
-                {"FLOWNEX".split("").map((char, idx) => (
-                  <span
-                    key={idx}
-                    style={{ "--index": idx + 1 } as React.CSSProperties}
-                    className={`intro-piece ${isIntroShown ? "show" : ""}`}
-                  >
-                    {char}
-                  </span>
-                ))}
-              </div>
+        {/* EXACT SAME STRUCTURE AS HERO COMPOSITION FOR PIXEL PERFECT ALIGNMENT */}
+        <div className="relative z-10 my-auto flex flex-col items-center justify-center w-full mx-auto py-2">
+          <div className="flex flex-col w-fit">
+            <h1 className="font-logo text-[13vw] sm:text-[14vw] lg:text-[13vw] leading-[0.95] tracking-[0.08em] uppercase font-[950] text-flownex-black select-none text-center drop-shadow-[0_8px_24px_rgba(0,0,0,0.18)]">
+              FLOWNEX
+            </h1>
+
+            {/* Hidden SOLUTIONS to maintain exact flex dimensions */}
+            <div className="flex justify-end mt-4 sm:mt-6 opacity-0">
+              <span className="font-wide text-[5vw] sm:text-[5.5vw] lg:text-[5vw] leading-none tracking-[0.1em] uppercase font-bold text-transparent text-right select-none">
+                SOLUTIONS
+              </span>
             </div>
           </div>
+        </div>
 
-          {/* Bottom Metadata Bar */}
-          <div className="flex justify-between items-end font-body text-xs font-bold uppercase tracking-widest text-black/80 h-4 opacity-0 invisible">
-            <span>BUSINESS SYSTEMS & PROCESS AUTOMATION</span>
-            <span>01 / 06</span>
+        {/* HERO LOWER BAR EQUIVALENT - HIDDEN TO MATCH HEIGHTS */}
+        <div className="relative z-10 w-full max-w-[1550px] mx-auto grid grid-cols-1 md:grid-cols-12 items-end justify-between border-t border-transparent pt-5 gap-4 opacity-0 invisible">
+          <div className="md:col-span-3 flex items-center gap-3">
+            <div className="w-[2px] h-8" />
+            <div className="font-body text-xs uppercase font-bold tracking-widest">
+              <div>SCROLL</div>
+              <div>TO EXPLORE</div>
+            </div>
+          </div>
+          <div className="md:col-span-9 flex justify-end font-body text-xs md:text-sm tracking-wide uppercase leading-relaxed text-right">
+            <p className="max-w-lg">
+              TURNING BUSINESS INFORMATION, DATA & WORKFLOWS INTO LIVING SYSTEMS.
+            </p>
           </div>
         </div>
-      )}
+      </div>
     </section>
   );
 }
