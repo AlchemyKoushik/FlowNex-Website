@@ -32,7 +32,6 @@ export default function Hero() {
         clearInterval(stopLenisInterval);
       }
     }, 10);
-    let unlockFrame: number | null = null;
 
     const introTimer = setTimeout(() => {
       setIsIntroShown(true);
@@ -45,24 +44,20 @@ export default function Hero() {
         onComplete: () => {
           // 3. STATE: HERO_ACTIVE & NORMAL_SCROLL_ENABLED
           clearInterval(stopLenisInterval);
+          
+          if (window.__startScroll) {
+            window.__startScroll();
+          } else {
+            document.body.style.overflow = "";
+            document.documentElement.style.overflow = "";
+            document.documentElement.classList.remove("hide-scrollbar");
+          }
 
           // Completely remove wrapper from flow to prevent any interaction or reappearance
           gsap.set(introWrapperRef.current, { display: "none" });
 
-          // Resume scrolling only after the hidden wrapper has been painted away.
-          unlockFrame = window.requestAnimationFrame(() => {
-            if (window.__startScroll) {
-              window.__startScroll();
-            } else {
-              document.body.style.overflow = "";
-              document.documentElement.style.overflow = "";
-              document.documentElement.classList.remove("hide-scrollbar");
-            }
-
-            // Refresh ScrollTrigger so parallax calculations are perfectly accurate.
-            ScrollTrigger.refresh();
-            unlockFrame = null;
-          });
+          // Refresh ScrollTrigger so parallax calculations are perfectly accurate
+          ScrollTrigger.refresh();
         },
       });
 
@@ -117,9 +112,6 @@ export default function Hero() {
     return () => {
       clearInterval(stopLenisInterval);
       clearTimeout(introTimer);
-      if (unlockFrame !== null) {
-        window.cancelAnimationFrame(unlockFrame);
-      }
       ctx.revert();
       
       // Cleanup: restore scroll if component unmounts
@@ -182,11 +174,7 @@ export default function Hero() {
         <div className="relative z-10 my-auto flex flex-col items-center justify-center w-full mx-auto py-2 pointer-events-auto">
           <div ref={compositionRef} className="flex flex-col w-fit">
             <h1 className="font-logo text-[13vw] sm:text-[14vw] lg:text-[13vw] leading-[0.95] tracking-[0.08em] uppercase font-[950] text-flownex-pink select-none text-center drop-shadow-[0_10px_30px_rgba(255,42,109,0.2)]">
-              {"FLOWNEX".split("").map((char, idx) => (
-                <span key={idx} className="inline-block">
-                  {char}
-                </span>
-              ))}
+              FLOWNEX
             </h1>
 
             <div className="flex justify-end mt-4 sm:mt-6">
@@ -227,7 +215,7 @@ export default function Hero() {
         {/* EXACT SAME STRUCTURE AS HERO COMPOSITION FOR PIXEL PERFECT ALIGNMENT */}
         <div className="relative z-10 my-auto flex flex-col items-center justify-center w-full mx-auto py-2">
           <div className="flex flex-col w-fit">
-            <h1 className="font-logo text-[13vw] sm:text-[14vw] lg:text-[13vw] leading-[0.95] tracking-[0.08em] uppercase font-[950] text-flownex-black select-none text-center drop-shadow-[0_8px_24px_rgba(0,0,0,0.18)]">
+            <div className="font-logo text-[13vw] sm:text-[14vw] lg:text-[13vw] leading-[0.95] tracking-[0.08em] uppercase font-[950] text-flownex-black select-none text-center drop-shadow-[0_8px_24px_rgba(0,0,0,0.18)]">
               {"FLOWNEX".split("").map((char, idx) => (
                 <span
                   key={idx}
@@ -237,7 +225,7 @@ export default function Hero() {
                   {char}
                 </span>
               ))}
-            </h1>
+            </div>
 
             {/* Hidden SOLUTIONS to maintain exact flex dimensions */}
             <div className="flex justify-end mt-4 sm:mt-6 opacity-0">
