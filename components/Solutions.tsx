@@ -125,10 +125,7 @@ export default function Solutions() {
           <div className="lg:col-span-5 lg:sticky lg:top-[20vh] self-start space-y-8 py-2 z-10">
             {/* Lenis-Style Pink Border & Giant Stacked Display Title */}
             <div className="border-l-4 border-flownex-pink pl-6 sm:pl-8 py-1">
-              <span className="font-body text-xs font-bold text-flownex-pink tracking-widest uppercase block mb-3">
-                02 / CORE CAPABILITIES
-              </span>
-              <h2 className="font-headline text-5xl sm:text-7xl lg:text-8xl uppercase font-extrabold text-flownex-white tracking-tight leading-[0.9] select-none">
+              <h2 className="font-logo text-5xl sm:text-7xl lg:text-8xl uppercase font-extrabold text-flownex-white tracking-[0.08em] leading-[1.0] select-none">
                 WHAT<br />
                 WE<br />
                 DO?
@@ -179,11 +176,6 @@ export default function Solutions() {
                   key={chap.num}
                   className="chapter-block min-h-[50vh] lg:min-h-[75vh] flex flex-col justify-center space-y-6"
                 >
-                  {/* Chapter Label */}
-                  <div className="font-body text-xs font-bold text-flownex-pink tracking-widest uppercase">
-                    CHAPTER {chap.num} — {chap.tagline}
-                  </div>
-
                   {/* Chapter Title */}
                   <h3 className="font-wide text-2xl sm:text-4xl lg:text-5xl uppercase font-bold text-flownex-pink tracking-[0.08em] leading-tight">
                     {chap.title}

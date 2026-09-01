@@ -91,9 +91,6 @@ export default function Showcase() {
       <div className="px-6 md:px-16 max-w-[1500px] mx-auto mb-8">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end border-b border-white/10 pb-6 gap-4">
           <div>
-            <span className="font-body text-xs font-bold text-flownex-pink tracking-widest uppercase">
-              05 / SHOWCASE PANELS
-            </span>
             <h2 className="font-headline text-4xl sm:text-6xl uppercase font-bold text-flownex-white mt-1">
               WHAT WE BUILD
             </h2>

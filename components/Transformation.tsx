@@ -58,10 +58,7 @@ export default function Transformation() {
 
         {/* Section Header */}
         <div className="relative z-10 text-center max-w-4xl mx-auto border-b border-white/10 pb-6 w-full">
-          <span className="font-body text-xs text-flownex-pink font-bold tracking-widest uppercase">
-            03 / THE TRANSFORMATION
-          </span>
-          <h2 className="font-headline text-3xl sm:text-5xl md:text-6xl uppercase font-extrabold text-flownex-white mt-2 tracking-tight">
+          <h2 className="font-logo text-3xl sm:text-5xl md:text-6xl uppercase font-extrabold text-flownex-white mt-2 tracking-[0.08em]">
             FROM DISCONNECTED TO CONNECTED.
           </h2>
           <div className="flex items-center justify-center gap-3 mt-4">
@@ -95,15 +92,6 @@ export default function Transformation() {
                     strokeOpacity={Math.max(0, (scrollProgress - 0.2) * 1.25)}
                     strokeDasharray="4 6"
                   />
-                  {scrollProgress > 0.7 && (
-                    <circle
-                      cx={startX + (centerX - startX) * 0.5}
-                      cy={startY + (centerY - startY) * 0.5}
-                      r={3}
-                      fill="#ffffff"
-                      className="animate-ping"
-                    />
-                  )}
                 </g>
               );
             })}

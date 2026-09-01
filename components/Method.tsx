@@ -84,9 +84,6 @@ export default function Method() {
         {/* Header Block with Staggered Line Reveals */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end border-b border-white/10 pb-12 gap-8">
           <div>
-            <span className="font-body text-xs text-flownex-pink font-bold tracking-widest uppercase">
-              04 / OUR METHODOLOGY
-            </span>
             <h2
               ref={titleRef}
               className="font-headline text-4xl sm:text-6xl lg:text-7xl uppercase font-bold text-flownex-white mt-2 leading-[0.9] overflow-hidden"
@@ -178,7 +175,7 @@ export default function Method() {
         </div>
 
         <div className="mt-24 text-center border-t border-white/10 pt-16">
-          <h3 className="font-headline text-3xl sm:text-5xl md:text-6xl uppercase font-extrabold text-flownex-white tracking-tight">
+          <h3 className="font-logo text-3xl sm:text-5xl md:text-6xl uppercase font-extrabold text-flownex-white tracking-[0.08em]">
             BUILD SYSTEMS THAT KEEP MOVING.
           </h3>
           <p className="font-headline text-xl sm:text-2xl uppercase font-bold text-flownex-pink tracking-widest mt-2">

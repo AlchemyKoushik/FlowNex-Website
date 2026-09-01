@@ -7,6 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const introWrapperRef = useRef<HTMLDivElement>(null);
+  const compositionRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const solutionsRef = useRef<HTMLDivElement>(null);
   const lowerBarRef = useRef<HTMLDivElement>(null);
@@ -83,27 +84,11 @@ export default function Hero() {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
-      if (titleRef.current && containerRef.current) {
-        gsap.fromTo(titleRef.current,
+      if (compositionRef.current && containerRef.current) {
+        gsap.fromTo(compositionRef.current,
           { y: 0 },
           {
-            y: 110,
-            ease: "none",
-            scrollTrigger: {
-              trigger: containerRef.current,
-              start: "top top",
-              end: "bottom top",
-              scrub: true,
-            },
-          }
-        );
-      }
-
-      if (solutionsRef.current && containerRef.current) {
-        gsap.fromTo(solutionsRef.current,
-          { y: 0 },
-          {
-            y: 60,
+            y: 90,
             ease: "none",
             scrollTrigger: {
               trigger: containerRef.current,
@@ -184,7 +169,7 @@ export default function Hero() {
 
         {/* Main Hero Wordmark Composition */}
         <div className="relative z-10 my-auto flex flex-col items-center justify-center w-full mx-auto py-2 pointer-events-auto">
-          <div className="flex flex-col w-fit">
+          <div ref={compositionRef} className="flex flex-col w-fit">
             <h1
               ref={titleRef}
               className={`font-logo text-[13vw] sm:text-[14vw] lg:text-[13vw] leading-[0.95] tracking-[0.08em] uppercase font-[950] text-flownex-pink select-none text-center drop-shadow-[0_10px_30px_rgba(255,42,109,0.2)] ${isIntroActive ? "hero-reveal-element" : ""} ${isCurtainOut ? "show" : ""}`}
@@ -219,28 +204,10 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="md:col-span-5 font-body text-xs md:text-sm text-flownex-white/70 font-normal tracking-wide uppercase leading-relaxed">
-            <p>
+          <div className="md:col-span-9 flex justify-end font-body text-xs md:text-sm text-flownex-white/70 font-normal tracking-wide uppercase leading-relaxed text-right">
+            <p className="max-w-lg">
               TURNING BUSINESS INFORMATION, DATA & WORKFLOWS INTO LIVING SYSTEMS.
             </p>
-          </div>
-
-          <div className="md:col-span-4 flex items-center justify-start md:justify-end gap-3">
-            <a
-              href="#contact"
-              onClick={(e) => e.preventDefault()}
-              className="px-5 py-2.5 rounded-full bg-flownex-pink text-white font-body text-xs font-bold uppercase tracking-wider hover:bg-flownex-pink-light transition-all shadow-[0_0_25px_rgba(255,42,109,0.35)] flex items-center gap-2"
-            >
-              <span>LET&apos;S DISCUSS</span>
-              <span>↗</span>
-            </a>
-            <a
-              href="#solutions"
-              className="px-5 py-2.5 rounded-full bg-white/10 border border-white/15 text-white font-body text-xs font-bold uppercase tracking-wider hover:bg-white/20 transition-all flex items-center gap-2"
-            >
-              <span>SOLUTIONS</span>
-              <span>↓</span>
-            </a>
           </div>
         </div>
       </div>
@@ -254,12 +221,9 @@ export default function Hero() {
           className={`absolute inset-0 z-50 bg-flownex-pink flex flex-col justify-between px-4 sm:px-8 md:px-14 pt-24 pb-10 transition-transform duration-[1.1s] ease-[cubic-bezier(0.19,1,0.22,1)] ${isCurtainOut ? "-translate-y-full" : "translate-y-0"}`}
         >
           {/* Top Metadata Header */}
-          <div className="flex items-center justify-between font-body text-xs font-bold uppercase tracking-widest text-black/80">
-            <span className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-black" />
-              FLOWNEX SOLUTIONS
-            </span>
-            <span>CREATIVE STUDIO</span>
+          <div className="flex items-center justify-between font-body text-xs font-bold uppercase tracking-widest text-black/80 h-4">
+            <span className="flex items-center gap-2 opacity-0 invisible w-[160px]"></span>
+            <span className="opacity-0 invisible">CREATIVE STUDIO</span>
           </div>
 
           {/* Central Oversized Wordmark sharing EXACT SAME context */}
@@ -280,7 +244,7 @@ export default function Hero() {
           </div>
 
           {/* Bottom Metadata Bar */}
-          <div className="flex justify-between items-end font-body text-xs font-bold uppercase tracking-widest text-black/80">
+          <div className="flex justify-between items-end font-body text-xs font-bold uppercase tracking-widest text-black/80 h-4 opacity-0 invisible">
             <span>BUSINESS SYSTEMS & PROCESS AUTOMATION</span>
             <span>01 / 06</span>
           </div>

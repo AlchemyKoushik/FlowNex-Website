@@ -3,18 +3,17 @@ import localFont from "next/font/local";
 import { Syne, Plus_Jakarta_Sans } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
-import "lenis/dist/lenis.css";
 import SmoothScroll from "@/components/SmoothScroll";
 
 const rokiest = localFont({
   src: [
-    { path: "../public/fonts/rokiest/Rokiest-Regular.otf", weight: "400", style: "normal" },
-    { path: "../public/fonts/rokiest/Rokiest-Medium.otf", weight: "500", style: "normal" },
-    { path: "../public/fonts/rokiest/Rokiest-Semibold.otf", weight: "600", style: "normal" },
-    { path: "../public/fonts/rokiest/Rokiest-Bold.otf", weight: "700", style: "normal" },
-    { path: "../public/fonts/rokiest/Rokiest-Extrabold.otf", weight: "800", style: "normal" },
-    { path: "../public/fonts/rokiest/Rokiest-Black.otf", weight: "900", style: "normal" },
-    { path: "../public/fonts/rokiest/Rokiest-Extrablack.otf", weight: "950", style: "normal" },
+    { path: "./fonts/rokiest/Rokiest-Regular.otf", weight: "400", style: "normal" },
+    { path: "./fonts/rokiest/Rokiest-Medium.otf", weight: "500", style: "normal" },
+    { path: "./fonts/rokiest/Rokiest-Semibold.otf", weight: "600", style: "normal" },
+    { path: "./fonts/rokiest/Rokiest-Bold.otf", weight: "700", style: "normal" },
+    { path: "./fonts/rokiest/Rokiest-Extrabold.otf", weight: "800", style: "normal" },
+    { path: "./fonts/rokiest/Rokiest-Black.otf", weight: "900", style: "normal" },
+    { path: "./fonts/rokiest/Rokiest-Extrablack.otf", weight: "950", style: "normal" },
   ],
   variable: "--font-rokiest",
   display: "swap",
@@ -33,7 +32,7 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "FlowNex Solutions - Creative Business Technology Studio",
+  title: "FlowNex Solutions",
   description:
     "FlowNex connects scattered business information, communication, data, and processes into structured, automated digital systems that flow.",
 };
