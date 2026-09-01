@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -14,6 +14,9 @@ declare global {
 }
 
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
+  const progressBarRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
   useEffect(() => {
     if (typeof window === "undefined") return;
 
@@ -37,16 +40,23 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       document.body.style.overflow = "hidden";
       document.documentElement.style.overflow = "hidden";
       document.documentElement.classList.add("hide-scrollbar");
+      setIsVisible(false);
     };
     window.__startScroll = () => {
       lenis?.start();
       document.body.style.overflow = "";
       document.documentElement.style.overflow = "";
       document.documentElement.classList.remove("hide-scrollbar");
+      setIsVisible(true);
     };
 
-    const handleScroll = () => {
+    const handleScroll = (e: any) => {
       ScrollTrigger.update();
+      if (progressBarRef.current) {
+        const progress = e.progress !== undefined ? e.progress : (lenis?.progress || 0);
+        const clamped = Math.max(0, Math.min(1, progress));
+        progressBarRef.current.style.transform = `scaleX(${clamped})`;
+      }
     };
 
     lenis.on("scroll", handleScroll);
@@ -73,5 +83,18 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     };
   }, []);
 
-  return <>{children}</>;
+  return (
+    <>
+      <div
+        ref={progressBarRef}
+        className="fixed top-0 left-0 w-full h-[3px] bg-flownex-pink z-[9999] pointer-events-none origin-left"
+        style={{
+          transform: "scaleX(0)",
+          opacity: isVisible ? 1 : 0,
+          transition: "opacity 0.5s ease",
+        }}
+      />
+      {children}
+    </>
+  );
 }

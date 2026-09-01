@@ -18,9 +18,7 @@ html {
   background-color: var(--color-black);
   color: var(--color-white);
   font-family: var(--font-jakarta), system-ui, -apple-system, sans-serif;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255, 42, 109, 0.3) #030305;
-  scrollbar-gutter: stable;
+  scrollbar-width: none;
 }
 
 /* Text Selection */
@@ -50,19 +48,8 @@ html {
   border: 1px solid rgba(255, 42, 109, 0.2);
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: #030305;
-}
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 42, 109, 0.35);
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-pink);
+html::-webkit-scrollbar {
+  display: none;
 }
 
 /* Lenis.dev Replicated Intro Motion System */
@@ -116,12 +103,6 @@ html {
   transform: translateY(0);
 }
 
-html.hide-scrollbar {
-  scrollbar-gutter: auto !important;
-}
 
-html.hide-scrollbar ::-webkit-scrollbar {
-  display: none !important;
-}
 
 

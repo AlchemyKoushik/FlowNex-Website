@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -9,6 +9,8 @@ export default function Hero() {
   const compositionRef = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
   const introWrapperRef = useRef<HTMLDivElement>(null);
+
+  const [isIntroShown, setIsIntroShown] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -31,10 +33,14 @@ export default function Hero() {
       }
     }, 10);
 
+    const introTimer = setTimeout(() => {
+      setIsIntroShown(true);
+    }, 150);
+
     const ctx = gsap.context(() => {
       // 2. STATE: WRAPPER_AUTO_ANIMATION & HERO_REVEAL
       const revealTl = gsap.timeline({
-        delay: 0.2, // Slight delay to let the page settle before animating
+        delay: 1.6, // Wait for text appearance animation to finish
         onComplete: () => {
           // 3. STATE: HERO_ACTIVE & NORMAL_SCROLL_ENABLED
           clearInterval(stopLenisInterval);
@@ -105,6 +111,7 @@ export default function Hero() {
 
     return () => {
       clearInterval(stopLenisInterval);
+      clearTimeout(introTimer);
       ctx.revert();
       
       // Cleanup: restore scroll if component unmounts
@@ -208,9 +215,17 @@ export default function Hero() {
         {/* EXACT SAME STRUCTURE AS HERO COMPOSITION FOR PIXEL PERFECT ALIGNMENT */}
         <div className="relative z-10 my-auto flex flex-col items-center justify-center w-full mx-auto py-2">
           <div className="flex flex-col w-fit">
-            <h1 className="font-logo text-[13vw] sm:text-[14vw] lg:text-[13vw] leading-[0.95] tracking-[0.08em] uppercase font-[950] text-flownex-black select-none text-center drop-shadow-[0_8px_24px_rgba(0,0,0,0.18)]">
-              FLOWNEX
-            </h1>
+            <div className="font-logo text-[13vw] sm:text-[14vw] lg:text-[13vw] leading-[0.95] tracking-[0.08em] uppercase font-[950] text-flownex-black select-none text-center drop-shadow-[0_8px_24px_rgba(0,0,0,0.18)]">
+              {"FLOWNEX".split("").map((char, idx) => (
+                <span
+                  key={idx}
+                  style={{ "--index": idx + 1 } as React.CSSProperties}
+                  className={`intro-piece ${isIntroShown ? "show" : ""}`}
+                >
+                  {char}
+                </span>
+              ))}
+            </div>
 
             {/* Hidden SOLUTIONS to maintain exact flex dimensions */}
             <div className="flex justify-end mt-4 sm:mt-6 opacity-0">
