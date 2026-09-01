@@ -31,56 +31,40 @@ export default function Footer() {
         { opacity: 0, y: 30, filter: "blur(4px)" },
         { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.8, ease: "power2.out" }
       )
-      .to(h1Ref.current, {
-        opacity: 0, y: -30, filter: "blur(4px)", duration: 0.5, ease: "power2.inOut", delay: 0.9
-      })
 
       // WORK BETTER
       .fromTo(h2Ref.current,
         { opacity: 0, y: 30, filter: "blur(4px)" },
-        { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.5, ease: "power2.out" },
-        "<0.15" // Overlap slightly with previous exit
+        { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.8, ease: "power2.out" },
+        "-=0.6" // Stagger entry
       )
-      .to(h2Ref.current, {
-        opacity: 0, y: -30, filter: "blur(4px)", duration: 0.5, ease: "power2.inOut", delay: 0.9
-      })
 
       // FLOW BETTER
       .fromTo(h3Ref.current,
         { opacity: 0, y: 30, filter: "blur(4px)" },
-        { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.5, ease: "power2.out" },
-        "<0.15"
+        { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.8, ease: "power2.out" },
+        "-=0.6"
+      )
+
+      // Wordmark "Flownex" appears automatically
+      .fromTo(wordmarkRef.current,
+        { opacity: 0, scale: 0.92, y: 30 },
+        { opacity: 1, scale: 1, y: 0, duration: 1.2, ease: "power3.out" },
+        "-=0.6" 
       )
 
       // CTA
       .fromTo(ctaRef.current,
         { opacity: 0, y: 20, scale: 0.96 },
         { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "power3.out" },
-        "+=0.8" // Hold FLOW BETTER briefly before CTA appears
+        "-=1.0" // Start shortly after wordmark starts
       )
 
       // Bottom Footer
       .fromTo(bottomFooterRef.current,
         { opacity: 0, y: 10 },
         { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-        "-=0.4"
-      );
-
-      // Existing Wordmark Parallax scaling (Scrubbed)
-      gsap.fromTo(
-        wordmarkRef.current,
-        { scale: 0.92, y: 30 },
-        {
-          scale: 1.04,
-          y: 0,
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top bottom",
-            end: "bottom bottom",
-            scrub: true,
-          },
-        }
+        "-=0.6"
       );
     }, sectionRef);
 
@@ -97,31 +81,31 @@ export default function Footer() {
       <div className="relative z-10 flex flex-col items-center justify-center max-w-[1400px] mx-auto w-full px-6 md:px-16 flex-grow">
         
         {/* The Stage for Animated Headlines */}
-        <div className="grid grid-cols-1 grid-rows-1 place-items-center mb-10 md:mb-12">
+        <div className="flex flex-col items-center gap-1 md:gap-2 mb-10 md:mb-12">
           <h3 
             ref={h1Ref} 
-            className="col-start-1 row-start-1 font-headline text-3xl sm:text-5xl md:text-6xl uppercase font-bold text-flownex-white tracking-tight will-change-transform opacity-0"
+            className="font-headline text-3xl sm:text-5xl md:text-6xl uppercase font-bold text-flownex-white tracking-tight will-change-transform opacity-0"
           >
-            BUILD BETTER.
+            BUILD BETTER
           </h3>
           <h3 
             ref={h2Ref} 
-            className="col-start-1 row-start-1 font-headline text-3xl sm:text-5xl md:text-6xl uppercase font-bold text-flownex-white tracking-tight will-change-transform opacity-0"
+            className="font-headline text-3xl sm:text-5xl md:text-6xl uppercase font-bold text-flownex-white tracking-tight will-change-transform opacity-0"
           >
-            WORK BETTER.
+            WORK BETTER
           </h3>
           <h3 
             ref={h3Ref} 
-            className="col-start-1 row-start-1 font-headline text-3xl sm:text-5xl md:text-6xl uppercase font-bold text-flownex-pink tracking-tight will-change-transform opacity-0"
+            className="font-headline text-3xl sm:text-5xl md:text-6xl uppercase font-bold text-flownex-pink tracking-tight will-change-transform opacity-0"
           >
-            FLOW BETTER.
+            FLOW BETTER
           </h3>
         </div>
 
         {/* Parallax Scaling Display Wordmark */}
         <h2
           ref={wordmarkRef}
-          className="font-logo text-[11vw] sm:text-[12vw] md:text-[10vw] leading-[0.8] font-[950] uppercase text-flownex-white tracking-[0.08em] select-none transition-transform will-change-transform"
+          className="font-logo text-[11vw] sm:text-[12vw] md:text-[10vw] leading-[0.8] font-[950] uppercase text-flownex-white tracking-[0.08em] select-none transition-transform will-change-transform opacity-0"
         >
           FLOWNEX
         </h2>
