@@ -19,6 +19,8 @@ export default function Hero() {
     // Force scroll to top instantly
     window.scrollTo(0, 0);
     document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+    document.documentElement.classList.add("hide-scrollbar");
 
     // Since Hero (child) mounts before SmoothScroll (parent), __stopScroll might not exist yet.
     // We poll briefly to ensure Lenis is completely paused as soon as it initializes.
@@ -41,6 +43,8 @@ export default function Hero() {
             window.__startScroll();
           } else {
             document.body.style.overflow = "";
+            document.documentElement.style.overflow = "";
+            document.documentElement.classList.remove("hide-scrollbar");
           }
 
           // Completely remove wrapper from flow to prevent any interaction or reappearance
@@ -108,6 +112,8 @@ export default function Hero() {
         window.__startScroll();
       } else {
         document.body.style.overflow = "";
+        document.documentElement.style.overflow = "";
+        document.documentElement.classList.remove("hide-scrollbar");
       }
     };
   }, []);

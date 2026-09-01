@@ -116,4 +116,12 @@ html {
   transform: translateY(0);
 }
 
+html.hide-scrollbar {
+  scrollbar-gutter: auto !important;
+}
+
+html.hide-scrollbar ::-webkit-scrollbar {
+  display: none !important;
+}
+
 

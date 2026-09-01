@@ -35,10 +35,14 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     window.__stopScroll = () => {
       lenis?.stop();
       document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+      document.documentElement.classList.add("hide-scrollbar");
     };
     window.__startScroll = () => {
       lenis?.start();
       document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+      document.documentElement.classList.remove("hide-scrollbar");
     };
 
     const handleScroll = () => {
