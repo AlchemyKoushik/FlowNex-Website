@@ -3,5 +3,6 @@
 node_modules/
 Saved (via Browser)/
 .vscode/
+.data/
 .DS_Store
 Thumbs.db

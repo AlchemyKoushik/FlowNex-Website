@@ -1,6 +1,8 @@
 "use client";
 
 import React from "react";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+import { ScheduleIcon } from "@/components/icons/ScheduleIcon";
 
 export default function Header() {
   return (
@@ -28,17 +30,26 @@ export default function Header() {
         </span>
       </a>
 
-      {/* Right - LET'S DISCUSS ↗ Visual CTA Button */}
-      <a
-        href="#contact"
-        onClick={(e) => e.preventDefault()}
-        className="pointer-events-auto group relative inline-flex items-center gap-2 px-5 py-2 rounded-full bg-flownex-pink text-white hover:bg-flownex-pink-light transition-all duration-300 backdrop-blur-md text-xs font-body font-bold tracking-wider uppercase shadow-[0_0_20px_rgba(255,42,109,0.3)]"
-      >
-        <span>LET&apos;S DISCUSS</span>
-        <span className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-          ↗
-        </span>
-      </a>
+      {/* Right - CTA Buttons */}
+      <div className="pointer-events-auto flex items-center gap-3">
+        <a
+          href="https://wa.me/1234567890"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group relative inline-flex items-center gap-2 px-4 py-2 md:px-5 rounded-full border border-flownex-white/20 text-flownex-white hover:bg-flownex-white/10 transition-all duration-300 backdrop-blur-md text-[10px] md:text-xs font-body font-bold tracking-wider uppercase"
+        >
+          <WhatsAppIcon className="w-3.5 h-3.5" />
+          <span>CONNECT</span>
+        </a>
+        <a
+          href="/schedule"
+          className="group relative inline-flex items-center gap-2 px-4 py-2 md:px-5 rounded-full bg-flownex-pink text-white hover:bg-flownex-pink-light transition-all duration-300 backdrop-blur-md text-[10px] md:text-xs font-body font-bold tracking-wider uppercase shadow-[0_0_20px_rgba(255,42,109,0.3)]"
+        >
+          <ScheduleIcon className="w-3.5 h-3.5" />
+          <span className="hidden md:inline">SCHEDULE A MEETING</span>
+          <span className="md:hidden">SCHEDULE</span>
+        </a>
+      </div>
     </header>
   );
 }

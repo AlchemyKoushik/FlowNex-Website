@@ -23,5 +23,5 @@
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next-local/types/**/*.ts"],
-  "exclude": ["node_modules", "Saved (via Browser)"]
+  "exclude": ["node_modules", "Saved (via Browser)", "n8n/workflows"]
 }

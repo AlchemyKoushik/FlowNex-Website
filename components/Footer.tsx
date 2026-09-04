@@ -3,6 +3,8 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+import { ScheduleIcon } from "@/components/icons/ScheduleIcon";
 
 export default function Footer() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -10,7 +12,7 @@ export default function Footer() {
   const h2Ref = useRef<HTMLHeadingElement>(null);
   const h3Ref = useRef<HTMLHeadingElement>(null);
   const wordmarkRef = useRef<HTMLHeadingElement>(null);
-  const ctaRef = useRef<HTMLAnchorElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
   const bottomFooterRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -110,15 +112,27 @@ export default function Footer() {
           FLOWNEX
         </h2>
 
-        <a
+        <div
           ref={ctaRef}
-          href="#contact"
-          onClick={(e) => e.preventDefault()}
-          className="mt-10 md:mt-12 inline-flex items-center gap-3 px-8 py-4 rounded-full bg-flownex-pink text-white font-body text-base uppercase tracking-wider font-bold hover:bg-flownex-pink-light transition-colors duration-300 shadow-[0_0_40px_rgba(255,42,109,0.4)] pointer-events-auto will-change-transform opacity-0"
+          className="mt-10 md:mt-12 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 will-change-transform opacity-0"
         >
-          <span>LET&apos;S DISCUSS</span>
-          <span>↗</span>
-        </a>
+          <a
+            href="https://wa.me/1234567890"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-3 w-full sm:w-auto px-8 py-4 rounded-full border border-flownex-white/20 text-flownex-white font-body text-base uppercase tracking-wider font-bold hover:bg-flownex-white/10 transition-colors duration-300 pointer-events-auto group"
+          >
+            <WhatsAppIcon className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" />
+            <span>CONNECT WITH US</span>
+          </a>
+          <a
+            href="/schedule"
+            className="inline-flex items-center justify-center gap-3 w-full sm:w-auto px-8 py-4 rounded-full bg-flownex-pink text-white font-body text-base uppercase tracking-wider font-bold hover:bg-flownex-pink-light transition-colors duration-300 shadow-[0_0_40px_rgba(255,42,109,0.4)] pointer-events-auto group"
+          >
+            <ScheduleIcon className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" />
+            <span>SCHEDULE A MEETING</span>
+          </a>
+        </div>
       </div>
 
       {/* Standard Footer Bottom Bar */}
