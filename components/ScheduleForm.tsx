@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Mic, Square, Play, Trash2, Check, ArrowRight, Loader2, Pause, Clock, AlertCircle } from 'lucide-react';
 import { submitMeetingRequest, MeetingRequestPayload, checkAvailability } from '@/lib/api';
 
@@ -43,13 +44,34 @@ export default function ScheduleForm() {
   const audioPlayerRef = useRef<HTMLAudioElement | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Focus effect for inputs
+  // Focus effect for form sections
   useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    
     if (containerRef.current) {
-      gsap.fromTo(containerRef.current, 
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }
-      );
+      const ctx = gsap.context(() => {
+        const sections = gsap.utils.toArray<HTMLElement>('.form-section');
+        
+        sections.forEach((section) => {
+          gsap.fromTo(
+            section,
+            { opacity: 0, y: 50 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 1,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: section,
+                start: 'top 85%',
+                toggleActions: 'play none none reverse',
+              },
+            }
+          );
+        });
+      }, containerRef);
+      
+      return () => ctx.revert();
     }
   }, []);
 
@@ -276,19 +298,10 @@ export default function ScheduleForm() {
   }
 
   return (
-    <div className="w-full max-w-3xl mx-auto px-6 py-24 md:py-32" ref={containerRef}>
-      <div className="mb-16">
-        <h1 className="font-headline text-4xl md:text-6xl font-bold uppercase tracking-wider text-flownex-white mb-4">
-          SCHEDULE A MEETING
-        </h1>
-        <p className="font-body text-flownex-white/60 text-lg">
-          Let&apos;s discuss how we can build, work, and flow better.
-        </p>
-      </div>
-
+    <div className="w-full" ref={containerRef}>
       <form onSubmit={handleSubmit} className="space-y-24">
         {/* Section 01 */}
-        <section className="space-y-8">
+        <section className="form-section space-y-8">
           <h2 className="font-headline text-flownex-pink text-lg font-bold tracking-widest uppercase border-b border-flownex-white/10 pb-4">
             WHEN SHOULD WE TALK?
           </h2>
@@ -396,7 +409,7 @@ export default function ScheduleForm() {
         </section>
 
         {/* Section 02 */}
-        <section className={`space-y-8 transition-opacity duration-500 ${availabilityStatus === 'available' ? 'opacity-100' : 'opacity-50 pointer-events-none'}`}>
+        <section className={`form-section space-y-8 transition-opacity duration-500 ${availabilityStatus === 'available' ? 'opacity-100' : 'opacity-50 pointer-events-none'}`}>
           <h2 className="font-headline text-flownex-pink text-lg font-bold tracking-widest uppercase border-b border-flownex-white/10 pb-4">
             YOUR DETAILS
           </h2>
@@ -429,7 +442,7 @@ export default function ScheduleForm() {
         </section>
 
         {/* Section 03 */}
-        <section className={`space-y-8 transition-opacity duration-500 ${availabilityStatus === 'available' ? 'opacity-100' : 'opacity-50 pointer-events-none'}`}>
+        <section className={`form-section space-y-8 transition-opacity duration-500 ${availabilityStatus === 'available' ? 'opacity-100' : 'opacity-50 pointer-events-none'}`}>
           <h2 className="font-headline text-flownex-pink text-lg font-bold tracking-widest uppercase border-b border-flownex-white/10 pb-4">
             TELL US WHAT&apos;S GOING ON
           </h2>
@@ -533,7 +546,7 @@ export default function ScheduleForm() {
         </section>
 
         {/* Section 04 - Optional */}
-        <section className={`space-y-12 border-t border-flownex-white/10 pt-12 transition-opacity duration-500 ${availabilityStatus === 'available' ? 'opacity-100' : 'opacity-50 pointer-events-none'}`}>
+        <section className={`form-section space-y-12 border-t border-flownex-white/10 pt-12 transition-opacity duration-500 ${availabilityStatus === 'available' ? 'opacity-100' : 'opacity-50 pointer-events-none'}`}>
           <div className="space-y-6">
             <h3 className="font-body text-sm font-bold uppercase tracking-wider text-flownex-white/80">
               WHAT ARE YOU TRYING TO IMPROVE? (OPTIONAL)
@@ -580,7 +593,7 @@ export default function ScheduleForm() {
         </section>
 
         {/* Submit */}
-        <div className={`pt-8 border-t border-flownex-white/10 flex items-center justify-between transition-opacity duration-500 ${availabilityStatus === 'available' ? 'opacity-100' : 'opacity-50 pointer-events-none'}`}>
+        <div className={`form-section pt-8 border-t border-flownex-white/10 flex items-center justify-between transition-opacity duration-500 ${availabilityStatus === 'available' ? 'opacity-100' : 'opacity-50 pointer-events-none'}`}>
           <p className="font-body text-xs text-flownex-white/40 max-w-xs">
             By submitting this form, you agree to our privacy policy.
           </p>

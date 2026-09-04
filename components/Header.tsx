@@ -14,7 +14,7 @@ export default function Header() {
       {/* Center - FlowNex brand mark / logo */}
       <a
         href="#"
-        className="pointer-events-auto group flex items-center gap-2 text-flownex-white no-underline focus:outline-none"
+        className="pointer-events-auto absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 group flex items-center gap-2 text-flownex-white no-underline focus:outline-none"
       >
         <svg
           width="26"
