@@ -6,7 +6,15 @@ import { ScheduleIcon } from "@/components/icons/ScheduleIcon";
 
 export default function Header() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 mix-blend-difference px-6 md:px-12 py-5 flex items-center justify-between pointer-events-none">
+    <header className="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-5 flex items-center justify-between pointer-events-none">
+      {/* Atmospheric Black Feathered Occlusion */}
+      <div 
+        className="absolute -inset-y-24 inset-x-0 -z-10 pointer-events-none"
+        style={{
+          background: "linear-gradient(to bottom, rgba(3,3,5,0) 0%, rgba(3,3,5,0.05) 8%, rgba(3,3,5,0.2) 16%, rgba(3,3,5,0.5) 23%, rgba(3,3,5,0.85) 28%, rgba(3,3,5,1) 32%, rgba(3,3,5,1) 68%, rgba(3,3,5,0.85) 72%, rgba(3,3,5,0.5) 77%, rgba(3,3,5,0.2) 84%, rgba(3,3,5,0.05) 92%, rgba(3,3,5,0) 100%)"
+        }}
+      />
+
       {/* Left - Clean minimal branding placeholder */}
       <div className="pointer-events-auto flex items-center gap-2.5 opacity-0 invisible w-[160px]">
       </div>

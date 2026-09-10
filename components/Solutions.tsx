@@ -11,7 +11,11 @@ const CHAPTERS = [
     tagline: "STRUCTURE THE FOUNDATION",
     description:
       "We help businesses overcome scattered files and information, excessive reliance on manual communication through WhatsApp, email and phone calls, and disconnected digital tools by creating a structured, centralized digital workspace where information, communication and everyday operations are organized and connected.",
-    elements: ["FILES", "MESSAGES", "TEAMS", "WORKSPACES", "DOCUMENTS"],
+    points: [
+      "From scattered to structured.",
+      "We simply create one connected digital workspace for your files, messages, teams, documents, and everyday work.",
+    ],
+    elements: ["EMAILS", "FILES", "USERS", "PERMISSIONS", "COLLABORATION", "SECURITY"],
   },
   {
     num: "02",
@@ -128,16 +132,41 @@ export default function Solutions() {
               <h2 className="font-logo text-5xl sm:text-7xl lg:text-8xl uppercase font-extrabold text-flownex-white tracking-[0.08em] leading-[1.0] select-none">
                 WHAT<br />
                 WE<br />
-                DO?
+                SOLVE?
               </h2>
             </div>
 
-            {/* Introductory Copy */}
-            <p className="font-body text-base text-flownex-white/80 font-normal leading-relaxed max-w-md pt-2">
-              Every business has information, people and processes moving through it.
-              When those things are scattered, work slows down. FlowNex connects them into
-              systems that work together.
-            </p>
+            {/* Introductory Timeline */}
+            <div className="relative mt-8 font-body max-w-md sm:max-w-lg mb-6">
+              {/* Vertical line aligned with pink border (border is 4px, center is at 1px for 2px width) */}
+              <div className="absolute left-[1px] top-2 bottom-2 w-[2px] bg-white/10 z-0"></div>
+
+              {/* Item 1 */}
+              <div className="relative flex items-center pl-6 sm:pl-8 mb-6">
+                <div className="shrink-0 w-[12px] h-[12px] rounded-full border-[2px] border-white/30 bg-flownex-black z-10"></div>
+                <p className="ml-5 text-flownex-white/90 text-base sm:text-[17px]">Your business has everything it needs</p>
+              </div>
+
+              {/* Item 2 */}
+              <div className="relative flex items-center pl-6 sm:pl-8 mb-6">
+                <div className="shrink-0 w-[12px] h-[12px] rounded-full border-[2px] border-white/30 bg-flownex-black z-10"></div>
+                <p className="ml-5 text-flownex-white/90 text-base sm:text-[17px]">It's just scattered everywhere</p>
+              </div>
+
+              {/* Item 3 */}
+              <div className="relative flex items-center pl-6 sm:pl-8 mb-6">
+                <div className="shrink-0 w-[12px] h-[12px] rounded-full border-[2px] border-white/30 bg-flownex-black z-10"></div>
+                <p className="ml-5 text-flownex-white/90 text-base sm:text-[17px]">Scattered information slows work down</p>
+              </div>
+
+              {/* Item 4 */}
+              <div className="relative flex items-center pl-6 sm:pl-8">
+                <div className="shrink-0 w-[12px] h-[12px] rounded-full bg-flownex-pink z-10 shadow-[0_0_10px_rgba(255,42,109,0.8)]"></div>
+                <h3 className="ml-5 text-flownex-white font-bold text-[22px] sm:text-[25px] leading-tight">
+                  We bring it all together
+                </h3>
+              </div>
+            </div>
 
             {/* Chapter Indicator Bar */}
             <div className="pt-6 border-t border-white/10 space-y-3 max-w-md">
@@ -181,10 +210,23 @@ export default function Solutions() {
                     {chap.title}
                   </h3>
 
-                  {/* Description Paragraph */}
-                  <p className="font-body text-base sm:text-lg text-flownex-white/85 font-light leading-relaxed max-w-xl">
-                    {chap.description}
-                  </p>
+                  {/* Description */}
+                  {chap.points ? (
+                    <ul className="max-w-xl space-y-4 font-body text-base sm:text-lg text-flownex-white/85 font-light leading-relaxed">
+                      {chap.points.map((point) => (
+                        <li key={point} className="flex items-start gap-3">
+                          <span className="pt-1 text-xl leading-none text-flownex-pink" aria-hidden="true">
+                            •
+                          </span>
+                          <span>{point}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="font-body text-base sm:text-lg text-flownex-white/85 font-light leading-relaxed max-w-xl">
+                      {chap.description}
+                    </p>
+                  )}
 
                   {/* Fragment Badges */}
                   <div className="pt-2">
