@@ -138,32 +138,57 @@ export default function Solutions() {
 
             {/* Introductory Timeline */}
             <div className="relative mt-8 font-body max-w-md sm:max-w-lg mb-6">
-              {/* Vertical line aligned with pink border (border is 4px, center is at 1px for 2px width) */}
-              <div className="absolute left-[1px] top-2 bottom-2 w-[2px] bg-white/10 z-0"></div>
+              <style dangerouslySetInnerHTML={{ __html: `
+                @keyframes flowLine1 {
+                  0% { top: 50%; height: 0; opacity: 1; }
+                  16.66% { top: 50%; height: calc(100% + 1.5rem); opacity: 1; }
+                  33.33% { top: calc(50% + 100% + 1.5rem); height: 0; opacity: 1; }
+                  33.34%, 100% { height: 0; opacity: 0; }
+                }
+                @keyframes flowLine2 {
+                  0%, 33.33% { top: 50%; height: 0; opacity: 0; }
+                  33.34% { top: 50%; height: 0; opacity: 1; }
+                  50% { top: 50%; height: calc(100% + 1.5rem); opacity: 1; }
+                  66.66% { top: calc(50% + 100% + 1.5rem); height: 0; opacity: 1; }
+                  66.67%, 100% { height: 0; opacity: 0; }
+                }
+                @keyframes flowLine3 {
+                  0%, 66.66% { top: 50%; height: 0; opacity: 0; }
+                  66.67% { top: 50%; height: 0; opacity: 1; }
+                  83.33% { top: 50%; height: calc(100% + 1.5rem); opacity: 1; }
+                  100% { top: calc(50% + 100% + 1.5rem); height: 0; opacity: 1; }
+                }
+                .animate-flow-1 { animation: flowLine1 6s ease-in-out infinite; }
+                .animate-flow-2 { animation: flowLine2 6s ease-in-out infinite; }
+                .animate-flow-3 { animation: flowLine3 6s ease-in-out infinite; }
+              `}} />
 
               {/* Item 1 */}
               <div className="relative flex items-center pl-6 sm:pl-8 mb-6">
-                <div className="shrink-0 w-[12px] h-[12px] rounded-full border-[2px] border-white/30 bg-flownex-black z-10"></div>
-                <p className="ml-5 text-flownex-white/90 text-base sm:text-[17px]">Your business has everything it needs</p>
+                <div className="absolute left-[29px] sm:left-[37px] w-[2px] bg-white/30 animate-flow-1 z-0 rounded-full"></div>
+                <div className="shrink-0 w-[12px] h-[12px] rounded-full border-[2px] border-white/30 bg-flownex-black z-10 relative"></div>
+                <p className="ml-5 text-flownex-white/90 text-base sm:text-[17px]">Your business has everything it needs.</p>
               </div>
 
               {/* Item 2 */}
               <div className="relative flex items-center pl-6 sm:pl-8 mb-6">
-                <div className="shrink-0 w-[12px] h-[12px] rounded-full border-[2px] border-white/30 bg-flownex-black z-10"></div>
-                <p className="ml-5 text-flownex-white/90 text-base sm:text-[17px]">It's just scattered everywhere</p>
+                <div className="absolute left-[29px] sm:left-[37px] w-[2px] bg-white/30 animate-flow-2 z-0 rounded-full"></div>
+                <div className="shrink-0 w-[12px] h-[12px] rounded-full border-[2px] border-white/30 bg-flownex-black z-10 relative"></div>
+                <p className="ml-5 text-flownex-white/90 text-base sm:text-[17px]">It's just scattered everywhere.</p>
               </div>
 
               {/* Item 3 */}
               <div className="relative flex items-center pl-6 sm:pl-8 mb-6">
-                <div className="shrink-0 w-[12px] h-[12px] rounded-full border-[2px] border-white/30 bg-flownex-black z-10"></div>
-                <p className="ml-5 text-flownex-white/90 text-base sm:text-[17px]">Scattered information slows work down</p>
+                <div className="absolute left-[29px] sm:left-[37px] w-[2px] animate-flow-3 z-0 rounded-full" style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.3) 50%, #ff2a6d 100%)' }}></div>
+                <div className="shrink-0 w-[12px] h-[12px] rounded-full border-[2px] border-white/30 bg-flownex-black z-10 relative"></div>
+                <p className="ml-5 text-flownex-white/90 text-base sm:text-[17px]">Scattered information slows work down.</p>
               </div>
 
               {/* Item 4 */}
               <div className="relative flex items-center pl-6 sm:pl-8">
-                <div className="shrink-0 w-[12px] h-[12px] rounded-full bg-flownex-pink z-10 shadow-[0_0_10px_rgba(255,42,109,0.8)]"></div>
+                <div className="shrink-0 w-[12px] h-[12px] rounded-full bg-flownex-pink z-10 shadow-[0_0_10px_rgba(255,42,109,0.8)] relative"></div>
                 <h3 className="ml-5 text-flownex-white font-bold text-[22px] sm:text-[25px] leading-tight">
-                  We bring it all together
+                  We bring it all together.
                 </h3>
               </div>
             </div>
