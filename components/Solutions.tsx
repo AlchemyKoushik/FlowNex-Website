@@ -13,7 +13,8 @@ const CHAPTERS = [
       "We help businesses overcome scattered files and information, excessive reliance on manual communication through WhatsApp, email and phone calls, and disconnected digital tools by creating a structured, centralized digital workspace where information, communication and everyday operations are organized and connected.",
     points: [
       "From scattered to structured.",
-      "We simply create one connected digital workspace for your files, messages, teams, documents, and everyday work.",
+      "We create one connected digital workspace for your files, messages, teams, documents, and everyday work.",
+      "Bring your digital essentials together — with the right tools, access, and structure, all in one place.",
     ],
     elements: ["EMAILS", "FILES", "USERS", "PERMISSIONS", "COLLABORATION", "SECURITY"],
   },
@@ -236,22 +237,24 @@ export default function Solutions() {
                   </h3>
 
                   {/* Description */}
-                  {chap.points ? (
-                    <ul className="max-w-xl space-y-4 font-body text-base sm:text-lg text-flownex-white/85 font-light leading-relaxed">
-                      {chap.points.map((point) => (
-                        <li key={point} className="flex items-start gap-3">
-                          <span className="pt-1 text-xl leading-none text-flownex-pink" aria-hidden="true">
-                            •
-                          </span>
-                          <span>{point}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p className="font-body text-base sm:text-lg text-flownex-white/85 font-light leading-relaxed max-w-xl">
-                      {chap.description}
-                    </p>
-                  )}
+                  <div className="px-2 sm:px-3 lg:px-4 w-full max-w-[740px] xl:max-w-[820px]">
+                    {chap.points ? (
+                      <ul className="space-y-4 font-body text-base sm:text-lg text-flownex-white/85 font-light leading-relaxed">
+                        {chap.points.map((point) => (
+                          <li key={point} className="flex items-start gap-3">
+                            <span className="pt-1 text-xl leading-none text-flownex-pink" aria-hidden="true">
+                              •
+                            </span>
+                            <span>{point}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p className="font-body text-base sm:text-lg text-flownex-white/85 font-light leading-relaxed">
+                        {chap.description}
+                      </p>
+                    )}
+                  </div>
 
                   {/* Fragment Badges */}
                   <div className="pt-2">
