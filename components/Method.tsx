@@ -77,7 +77,7 @@ export default function Method() {
     <section
       id="method-section"
       ref={containerRef}
-      className="w-full bg-flownex-darker py-32 px-6 md:px-16 border-t border-white/10 relative overflow-hidden"
+      className="w-full bg-flownex-darker py-32 px-6 md:px-16 relative overflow-hidden"
     >
       <div className="absolute top-1/2 right-0 w-[50vw] h-[50vw] bg-flownex-burgundy/40 rounded-full blur-[160px] pointer-events-none" />
 

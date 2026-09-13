@@ -83,7 +83,7 @@ export default function Showcase() {
     <section
       id="showcase-section"
       ref={sectionRef}
-      className="relative w-full bg-flownex-black overflow-hidden py-12 min-h-screen flex flex-col justify-center border-t border-white/10"
+      className="relative w-full bg-flownex-black overflow-hidden py-12 min-h-screen flex flex-col justify-center"
     >
       {/* Background Atmosphere */}
       <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-[60vw] h-[40vw] bg-flownex-burgundy/40 rounded-full blur-[160px] pointer-events-none" />

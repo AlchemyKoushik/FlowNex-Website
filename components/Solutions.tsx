@@ -167,7 +167,7 @@ export default function Solutions() {
     <section
       ref={containerRef}
       id="solutions"
-      className="relative w-full bg-flownex-black text-flownex-white pt-28 md:pt-36 pb-8 md:pb-12 px-6 md:px-16 border-t border-white/10"
+      className="relative w-full bg-flownex-black text-flownex-white pt-28 md:pt-36 pb-8 md:pb-12 px-6 md:px-16"
     >
       {/* Subtle Background Parallax Visual */}
       <div className="solutions-bg-visual absolute top-[10%] right-[-5%] w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] bg-flownex-burgundy/20 rounded-full blur-[140px] pointer-events-none" />
