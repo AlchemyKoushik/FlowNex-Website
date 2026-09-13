@@ -149,7 +149,7 @@ export default function Method() {
   }, []);
 
   return (
-    <section ref={containerRef} className="w-full bg-flownex-darker relative border-t border-white/5">
+    <section ref={containerRef} className="w-full bg-transparent relative border-t border-white/5">
       {/* 
         Scroll Track: 
         Height determines pinning duration. 4 cards = 400vh.
@@ -158,20 +158,6 @@ export default function Method() {
         
         {/* Sticky Stage */}
         <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between py-12 px-6 md:px-16">
-          
-          {/* Atmospheric Background Element */}
-          <div className="absolute inset-0 pointer-events-none overflow-hidden flex items-center justify-center">
-            <div className="w-[80vw] h-[80vw] max-w-[800px] max-h-[800px] bg-flownex-burgundy/10 rounded-full blur-[120px] absolute opacity-60 mix-blend-screen" />
-            <div className="w-[60vw] h-[60vw] max-w-[600px] max-h-[600px] border border-flownex-pink/5 rounded-full absolute animate-[spin_60s_linear_infinite]" />
-            <div className="w-[40vw] h-[40vw] max-w-[400px] max-h-[400px] border border-flownex-pink/10 rounded-full absolute animate-[spin_40s_linear_infinite_reverse]" />
-            <div 
-              className="absolute inset-0 opacity-[0.02]" 
-              style={{
-                backgroundImage: `linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)`,
-                backgroundSize: `4rem 4rem`
-              }}
-            />
-          </div>
 
           {/* Section Header (Asymmetrical) */}
           <div className="relative z-20 flex flex-col md:flex-row justify-between items-start md:items-end w-full max-w-[1520px] mx-auto mt-4 md:mt-8 gap-4 md:gap-8">

@@ -77,10 +77,8 @@ export default function Footer() {
     <footer
       id="footer-section"
       ref={sectionRef}
-      className="w-full relative bg-flownex-black overflow-hidden flex flex-col justify-between min-h-screen pt-24 md:pt-32"
+      className="w-full relative bg-transparent overflow-hidden flex flex-col justify-between min-h-screen pt-24 md:pt-32"
     >
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[70vw] h-[30vw] bg-flownex-burgundy/50 rounded-full blur-[140px] pointer-events-none" />
-      
       <div className="relative z-10 flex flex-col items-center justify-center max-w-[1400px] mx-auto w-full px-6 md:px-16 flex-grow">
         
         {/* The Stage for Animated Headlines */}

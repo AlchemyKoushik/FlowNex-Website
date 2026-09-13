@@ -83,13 +83,10 @@ export default function Showcase() {
     <section
       id="showcase-section"
       ref={sectionRef}
-      className="relative w-full bg-flownex-black overflow-hidden py-12 min-h-screen flex flex-col justify-center"
+      className="relative w-full bg-transparent overflow-hidden py-12 min-h-screen flex flex-col justify-center"
     >
-      {/* Background Atmosphere */}
-      <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-[60vw] h-[40vw] bg-flownex-burgundy/40 rounded-full blur-[160px] pointer-events-none" />
-
       {/* Static Section Header */}
-      <div className="w-full px-6 md:px-16 max-w-[1400px] mx-auto mb-8 relative z-10">
+      <div className="w-full px-6 md:px-16 max-w-[1550px] mx-auto mb-8 relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end border-b border-white/10 pb-12 gap-8">
           <div>
             <h2 className="font-headline text-4xl sm:text-6xl lg:text-7xl uppercase font-bold text-flownex-white mt-1 leading-[0.9]">

@@ -146,18 +146,6 @@ export default function Solutions() {
           end: "center center",
         });
       });
-
-      // Background Parallax
-      gsap.to(".solutions-bg-visual", {
-        yPercent: 30,
-        ease: "none",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
     }, containerRef);
 
     return () => ctx.revert();
@@ -167,11 +155,8 @@ export default function Solutions() {
     <section
       ref={containerRef}
       id="solutions"
-      className="relative w-full bg-flownex-black text-flownex-white pt-28 md:pt-36 pb-8 md:pb-12 px-6 md:px-16"
+      className="relative w-full bg-transparent text-flownex-white pt-28 md:pt-36 pb-8 md:pb-12 px-6 md:px-16"
     >
-      {/* Subtle Background Parallax Visual */}
-      <div className="solutions-bg-visual absolute top-[10%] right-[-5%] w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] bg-flownex-burgundy/20 rounded-full blur-[140px] pointer-events-none" />
-
       <div className="max-w-[1500px] mx-auto relative z-10">
         {/* Two-Column Layout (Matching Lenis 'WHY SMOOTH SCROLL?' Pinned Layout) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start relative">

@@ -7,7 +7,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 export default function Hero() {
   const containerRef = useRef<HTMLElement>(null);
   const compositionRef = useRef<HTMLDivElement>(null);
-  const glowRef = useRef<HTMLDivElement>(null);
   const introWrapperRef = useRef<HTMLDivElement>(null);
 
   const [isIntroShown, setIsIntroShown] = useState(false);
@@ -87,26 +86,6 @@ export default function Hero() {
           }
         );
       }
-
-      if (glowRef.current) {
-        gsap.fromTo(
-          glowRef.current,
-          { xPercent: -50, yPercent: -50, scale: 1, opacity: 0.8 },
-          {
-            xPercent: -50,
-            yPercent: -50,
-            scale: 1.3,
-            opacity: 0.2,
-            ease: "none",
-            scrollTrigger: {
-              trigger: containerRef.current,
-              start: "top top",
-              end: "bottom top",
-              scrub: true,
-            },
-          }
-        );
-      }
     }, containerRef);
 
     return () => {
@@ -129,42 +108,8 @@ export default function Hero() {
     <section
       id="hero-section"
       ref={containerRef}
-      className="relative w-full h-screen min-h-[780px] bg-flownex-black overflow-hidden select-none"
+      className="relative w-full h-screen min-h-[780px] bg-transparent overflow-hidden select-none"
     >
-      {/* 2. HERO BACKGROUND ATMOSPHERE WITH SCRUBBED PARALLAX */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-        <div
-          ref={glowRef}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] h-[55vw] max-w-[1300px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-flownex-burgundy via-flownex-red/20 to-transparent blur-[160px] opacity-80"
-        />
-        <div className="absolute top-1/3 right-1/4 w-[35vw] h-[35vw] bg-flownex-pink/10 rounded-full blur-[140px] animate-pulse-glow" />
-        <div className="absolute inset-0 bg-noise opacity-30" />
-
-        <svg
-          className="absolute inset-0 w-full h-full opacity-20"
-          viewBox="0 0 1440 900"
-          fill="none"
-        >
-          <path
-            d="M -100 320 Q 400 120 850 520 T 1700 220"
-            stroke="url(#hero-pink-gradient)"
-            strokeWidth="1.5"
-            strokeDasharray="6 10"
-          />
-          <path
-            d="M -50 680 Q 550 820 1050 280 T 1600 580"
-            stroke="rgba(255,42,109,0.12)"
-            strokeWidth="1"
-          />
-          <defs>
-            <linearGradient id="hero-pink-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#ff2a6d" stopOpacity="0.8" />
-              <stop offset="100%" stopColor="#18030c" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
-
       {/* 3. HERO LAYER (PERSISTENT STAGE) */}
       <div className="absolute inset-0 z-10 flex flex-col justify-between px-4 sm:px-8 md:px-14 pt-24 pb-10 pointer-events-none">
         

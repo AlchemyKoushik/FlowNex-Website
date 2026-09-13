@@ -8,7 +8,7 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="relative w-full bg-flownex-black text-flownex-white overflow-x-clip">
+    <main className="relative w-full text-flownex-white overflow-x-clip bg-transparent">
       <Header />
       <Hero />
       <Solutions />

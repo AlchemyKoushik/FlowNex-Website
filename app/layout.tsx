@@ -84,6 +84,8 @@ const stripExtensionAttrs = `
 })();
 `;
 
+import AnimatedBackground from "@/components/AnimatedBackground";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -114,8 +116,9 @@ export default function RootLayout({
       </head>
       <body
         suppressHydrationWarning
-        className="bg-flownex-black text-flownex-white antialiased selection:bg-flownex-pink selection:text-white min-h-screen"
+        className="text-flownex-white antialiased selection:bg-flownex-pink selection:text-white min-h-screen relative bg-transparent"
       >
+        <AnimatedBackground />
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>

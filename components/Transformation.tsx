@@ -45,17 +45,11 @@ export default function Transformation() {
   }, []);
 
   return (
-    <section id="transformation-section" ref={containerRef} className="relative w-full bg-flownex-black">
+    <section id="transformation-section" ref={containerRef} className="relative w-full bg-transparent">
       <div
         ref={pinRef}
         className="w-full h-screen flex flex-col justify-center px-6 md:px-16 py-12 overflow-hidden relative"
       >
-        {/* Background Ambient Glow */}
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] h-[70vw] bg-flownex-burgundy/60 rounded-full blur-[180px] pointer-events-none transition-all duration-1000"
-          style={{ opacity: 0.3 + scrollProgress * 0.5 }}
-        />
-
         {/* Section Header */}
         <div className="relative z-10 text-center max-w-4xl mx-auto border-b border-white/10 pb-6 w-full">
           <h2 className="font-logo text-3xl sm:text-5xl md:text-6xl uppercase font-extrabold text-flownex-white mt-2 tracking-[0.08em]">
