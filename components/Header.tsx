@@ -1,15 +1,57 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { ScheduleIcon } from "@/components/icons/ScheduleIcon";
 
 export default function Header() {
+  const [isBgVisible, setIsBgVisible] = useState(false);
+
+  useEffect(() => {
+    const sections = [
+      { id: "hero-section", visible: false },
+      { id: "solutions", visible: true },
+      { id: "transformation-section", visible: false },
+      { id: "method-section", visible: true },
+      { id: "showcase-section", visible: false },
+      { id: "footer-section", visible: true },
+    ];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Find the most intersecting entry if multiple exist
+        // or simply take the one that is intersecting
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const section = sections.find((s) => s.id === entry.target.id);
+            if (section) {
+              setIsBgVisible(section.visible);
+            }
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: "-49% 0px -49% 0px", // Trigger when the center of the viewport enters the section
+        threshold: 0,
+      }
+    );
+
+    sections.forEach(({ id }) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-5 flex items-center justify-between pointer-events-none">
       {/* Atmospheric Black Feathered Occlusion */}
       <div 
-        className="absolute -inset-y-24 inset-x-0 -z-10 pointer-events-none"
+        className={`absolute -inset-y-24 inset-x-0 -z-10 pointer-events-none transition-opacity duration-1000 ease-in-out ${
+          isBgVisible ? "opacity-100" : "opacity-0"
+        }`}
         style={{
           background: "linear-gradient(to bottom, rgba(3,3,5,0) 0%, rgba(3,3,5,0.05) 8%, rgba(3,3,5,0.2) 16%, rgba(3,3,5,0.5) 23%, rgba(3,3,5,0.85) 28%, rgba(3,3,5,1) 32%, rgba(3,3,5,1) 68%, rgba(3,3,5,0.85) 72%, rgba(3,3,5,0.5) 77%, rgba(3,3,5,0.2) 84%, rgba(3,3,5,0.05) 92%, rgba(3,3,5,0) 100%)"
         }}

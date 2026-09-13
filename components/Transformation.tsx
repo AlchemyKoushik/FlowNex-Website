@@ -45,10 +45,10 @@ export default function Transformation() {
   }, []);
 
   return (
-    <section ref={containerRef} className="relative w-full bg-flownex-black">
+    <section id="transformation-section" ref={containerRef} className="relative w-full bg-flownex-black">
       <div
         ref={pinRef}
-        className="w-full h-screen flex flex-col justify-between px-6 md:px-16 py-12 overflow-hidden relative"
+        className="w-full h-screen flex flex-col justify-center px-6 md:px-16 py-12 overflow-hidden relative"
       >
         {/* Background Ambient Glow */}
         <div
@@ -70,7 +70,7 @@ export default function Transformation() {
         </div>
 
         {/* Interactive Cinematic Flow Canvas */}
-        <div className="relative z-10 w-full max-w-5xl mx-auto h-[460px] my-auto flex items-center justify-center">
+        <div className="relative z-10 w-full max-w-5xl mx-auto h-[460px] my-8 md:my-12 flex items-center justify-center">
           {/* Connecting Energy SVG Lines */}
           <svg className="absolute inset-0 w-full h-full pointer-events-none">
             {FRAGMENTS.map((frag, i) => {

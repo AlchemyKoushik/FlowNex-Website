@@ -75,6 +75,7 @@ export default function Method() {
 
   return (
     <section
+      id="method-section"
       ref={containerRef}
       className="w-full bg-flownex-darker py-32 px-6 md:px-16 border-t border-white/10 relative overflow-hidden"
     >

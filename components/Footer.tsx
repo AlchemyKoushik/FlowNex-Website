@@ -75,6 +75,7 @@ export default function Footer() {
 
   return (
     <footer
+      id="footer-section"
       ref={sectionRef}
       className="w-full relative bg-flownex-black overflow-hidden flex flex-col justify-between min-h-screen pt-24 md:pt-32"
     >

@@ -24,6 +24,11 @@ const CHAPTERS = [
     tagline: "TURN REPETITION INTO FLOW",
     description:
       "Replace repetitive manual work with structured digital workflows that automatically move requests, approvals, notifications, tasks and information to the right people at the right time.",
+    points: [
+      "From scattered to structured.",
+      "We create one connected digital workspace for your files, messages, teams, documents, and everyday work.",
+      "Bring your digital essentials together — with the right tools, access, and structure, all in one place.",
+    ],
     elements: ["REQUESTS", "APPROVALS", "ACTIONS", "AUTO DISPATCH"],
   },
   {
@@ -32,7 +37,12 @@ const CHAPTERS = [
     tagline: "FROM FIRST CONTACT TO CUSTOMER",
     description:
       "Bring leads, customer information, follow-ups and sales activity into one organized system so your team can see what needs attention, what is moving forward and what is being missed.",
-    elements: ["LEADS", "CONTACTS", "DEALS", "CUSTOMER PIPELINE"],
+    points: [
+      "From scattered to structured.",
+      "We create one connected digital workspace for your files, messages, teams, documents, and everyday work.",
+      "Bring your digital essentials together — with the right tools, access, and structure, all in one place.",
+    ],
+      elements: ["LEADS", "CONTACTS", "DEALS", "CUSTOMER PIPELINE"],
   },
   {
     num: "04",
@@ -40,7 +50,12 @@ const CHAPTERS = [
     tagline: "TURN DATA INTO DIRECTION",
     description:
       "Turn scattered business data into clear reports, dashboards and insights that help you understand performance, track important metrics and make better decisions.",
-    elements: ["KPIS", "TRENDS", "LIVE DASHBOARDS", "BUSINESS INSIGHTS"],
+    points: [
+      "From scattered to structured.",
+      "We create one connected digital workspace for your files, messages, teams, documents, and everyday work.",
+      "Bring your digital essentials together — with the right tools, access, and structure, all in one place.",
+    ],
+      elements: ["KPIS", "TRENDS", "LIVE DASHBOARDS", "BUSINESS INSIGHTS"],
   },
   {
     num: "05",
@@ -48,6 +63,11 @@ const CHAPTERS = [
     tagline: "MAKE INFORMATION WORK HARDER",
     description:
       "Apply AI where it can create real business value — from finding and understanding information to assisting employees, processing documents, analyzing data and automating intelligent tasks.",
+    points: [
+      "From scattered to structured.",
+      "We create one connected digital workspace for your files, messages, teams, documents, and everyday work.",
+      "Bring your digital essentials together — with the right tools, access, and structure, all in one place.",
+    ],
     elements: ["DOCUMENT AI", "KNOWLEDGE ENGINE", "SMART ASSISTANTS"],
   },
   {
@@ -56,6 +76,11 @@ const CHAPTERS = [
     tagline: "BUILD AROUND YOUR BUSINESS",
     description:
       "When existing software does not fit the way your business works, we build focused digital tools around your specific requirements — from internal portals and trackers to dashboards, calculators and custom workflows.",
+    points: [
+      "From scattered to structured.",
+      "We create one connected digital workspace for your files, messages, teams, documents, and everyday work.",
+      "Bring your digital essentials together — with the right tools, access, and structure, all in one place.",
+    ],
     elements: ["INTERNAL PORTALS", "TRACKERS", "CUSTOM WORKFLOWS"],
   },
 ];

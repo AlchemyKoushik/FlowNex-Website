@@ -25,13 +25,13 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     window.scrollTo(0, 0);
 
     let lenis: Lenis | null = new Lenis({
-      duration: 1.2,
+      duration: 1.8, // Increased from 1.2 for slower, smoother interpolation
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 1.5,
+      wheelMultiplier: 0.65, // Decreased from 1 for slower scrolling
+      touchMultiplier: 1.2, // Decreased slightly for slower touch scrolling
     });
 
     window.__lenis = lenis;

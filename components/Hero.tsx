@@ -127,6 +127,7 @@ export default function Hero() {
 
   return (
     <section
+      id="hero-section"
       ref={containerRef}
       className="relative w-full h-screen min-h-[780px] bg-flownex-black overflow-hidden select-none"
     >
