@@ -93,6 +93,7 @@ const CHAPTERS = [
 
 export default function Solutions() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const leftColumnRef = useRef<HTMLDivElement>(null);
   const [activeChapter, setActiveChapter] = useState(0);
 
   useEffect(() => {
@@ -102,6 +103,8 @@ export default function Solutions() {
       const chapterEls = gsap.utils.toArray<HTMLElement>(".chapter-block");
 
       chapterEls.forEach((el, index) => {
+        const isLast = index === chapterEls.length - 1;
+
         ScrollTrigger.create({
           trigger: el,
           start: "top 50%",
@@ -125,8 +128,23 @@ export default function Solutions() {
           { opacity: 0, y: 120 },
           { opacity: 1, y: 0, ease: "none", duration: 1 } // Entrance
         )
-        .to(el, { opacity: 1, y: 0, duration: 1 }) // Resting state in center
-        .to(el, { opacity: 0, y: -120, ease: "none", duration: 1 }); // Exit
+        .to(el, { opacity: 1, y: 0, duration: 1 }); // Resting state in center
+
+        if (!isLast) {
+          tl.to(el, { opacity: 0, y: -120, ease: "none", duration: 1 }); // Exit
+        }
+      });
+
+      // Pin the Left Column via GSAP so it unpins precisely when the last chapter centers (desktop only)
+      let mm = gsap.matchMedia();
+      mm.add("(min-width: 1024px)", () => {
+        ScrollTrigger.create({
+          trigger: leftColumnRef.current,
+          pin: true,
+          start: "top 20%",
+          endTrigger: chapterEls[chapterEls.length - 1],
+          end: "center center",
+        });
       });
 
       // Background Parallax
@@ -157,8 +175,8 @@ export default function Solutions() {
       <div className="max-w-[1500px] mx-auto relative z-10">
         {/* Two-Column Layout (Matching Lenis 'WHY SMOOTH SCROLL?' Pinned Layout) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start relative">
-          {/* LEFT COLUMN: Pure CSS Sticky Anchor */}
-          <div className="lg:col-span-5 lg:sticky lg:top-[20vh] self-start space-y-8 py-2 z-10">
+          {/* LEFT COLUMN: GSAP Pinned Anchor */}
+          <div ref={leftColumnRef} className="lg:col-span-5 self-start space-y-8 py-2 z-10">
             {/* Lenis-Style Pink Border & Giant Stacked Display Title */}
             <div className="border-l-4 border-flownex-pink pl-6 sm:pl-8 py-1">
               <h2 className="font-logo text-5xl sm:text-7xl lg:text-8xl uppercase font-extrabold text-flownex-white tracking-[0.08em] leading-[1.0] select-none">
