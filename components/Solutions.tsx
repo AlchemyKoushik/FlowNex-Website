@@ -12,11 +12,12 @@ const CHAPTERS = [
     description:
       "We help businesses overcome scattered files and information, excessive reliance on manual communication through WhatsApp, email and phone calls, and disconnected digital tools by creating a structured, centralized digital workspace where information, communication and everyday operations are organized and connected.",
     points: [
-      "From scattered to structured.",
-      "We create one connected digital workspace for your files, messages, teams, documents, and everyday work.",
-      "Bring your digital essentials together — with the right tools, access, and structure, all in one place.",
+      "Bring your digital tools together in one connected workspace",
+      "Give every file and document a clear place to live",
+      "Turn manual requests into simple digital processes",
+      "Put the right access and permissions in the right hands",
     ],
-    elements: ["EMAILS", "FILES", "USERS", "PERMISSIONS", "COLLABORATION", "SECURITY"],
+    elements: ["MICROSOFT 365", "DOCUMENTS", "DIGITAL FORMS", "ACCESS & PERMISSIONS", "COLLABORATION"],
   },
   {
     num: "02",
@@ -25,11 +26,12 @@ const CHAPTERS = [
     description:
       "Replace repetitive manual work with structured digital workflows that automatically move requests, approvals, notifications, tasks and information to the right people at the right time.",
     points: [
-      "From scattered to structured.",
-      "We create one connected digital workspace for your files, messages, teams, documents, and everyday work.",
-      "Bring your digital essentials together — with the right tools, access, and structure, all in one place.",
+      "Stop chasing approvals. Let the workflow do the chasing",
+      "Keep every deadline, task, and follow-up on track",
+      "Take repetitive work off your team’s plate",
+      "Get the reports you need, right when you need <them></them>",
     ],
-    elements: ["REQUESTS", "APPROVALS", "ACTIONS", "AUTO DISPATCH"],
+    elements: ["APPROVALS", "AUTOMATIONS", "NOTIFICATIONS", "TASKS & REMINDERS", "REPORTING"],
   },
   {
     num: "03",
@@ -38,11 +40,12 @@ const CHAPTERS = [
     description:
       "Bring leads, customer information, follow-ups and sales activity into one organized system so your team can see what needs attention, what is moving forward and what is being missed.",
     points: [
-      "From scattered to structured.",
-      "We create one connected digital workspace for your files, messages, teams, documents, and everyday work.",
-      "Bring your digital essentials together — with the right tools, access, and structure, all in one place.",
+      "Stop losing leads in notebooks, spreadsheets, and scattered conversations",
+      "See every opportunity move from first contact to close",
+      "Never let a follow-up depend on someone remembering",
+      "Know exactly where every quotation stands, and what happens next",
     ],
-      elements: ["LEADS", "CONTACTS", "DEALS", "CUSTOMER PIPELINE"],
+      elements: ["CRM", "LEAD MANAGEMENT", "SALES PIPELINE", "FOLLOW-UPS", "QUOTATIONS"],
   },
   {
     num: "04",
@@ -51,11 +54,12 @@ const CHAPTERS = [
     description:
       "Turn scattered business data into clear reports, dashboards and insights that help you understand performance, track important metrics and make better decisions.",
     points: [
-      "From scattered to structured.",
-      "We create one connected digital workspace for your files, messages, teams, documents, and everyday work.",
-      "Bring your digital essentials together — with the right tools, access, and structure, all in one place.",
+      "Stop piecing together numbers just to understand your business",
+      "See sales, finance, and operations in one clear view",
+      "Turn scattered business data into decisions you can act on",
+      "Know what’s happening across your business, without digging through files",
     ],
-      elements: ["KPIS", "TRENDS", "LIVE DASHBOARDS", "BUSINESS INSIGHTS"],
+      elements: ["SALES DASHBOARDS", "FINANCE DASHBOARDS", "OPERATIONS DASHBOARDS", "MANAGEMENT KPIs"],
   },
   {
     num: "05",
@@ -64,11 +68,12 @@ const CHAPTERS = [
     description:
       "Apply AI where it can create real business value — from finding and understanding information to assisting employees, processing documents, analyzing data and automating intelligent tasks.",
     points: [
-      "From scattered to structured.",
-      "We create one connected digital workspace for your files, messages, teams, documents, and everyday work.",
-      "Bring your digital essentials together — with the right tools, access, and structure, all in one place.",
+      "Stop reading documents line by line. Let AI find what matters",
+      "Turn sales conversations into clear summaries and ready-to-use follow-ups",
+      "Give your team instant answers from your company’s own knowledge",
+      "Turn a blank page into a first draft in seconds",
     ],
-    elements: ["DOCUMENT AI", "KNOWLEDGE ENGINE", "SMART ASSISTANTS"],
+    elements: ["DOCUMENT AI", "SALES AI", "KNOWLEDGE AI", "CONTENT AI"],
   },
   {
     num: "06",
@@ -77,11 +82,12 @@ const CHAPTERS = [
     description:
       "When existing software does not fit the way your business works, we build focused digital tools around your specific requirements — from internal portals and trackers to dashboards, calculators and custom workflows.",
     points: [
-      "From scattered to structured.",
-      "We create one connected digital workspace for your files, messages, teams, documents, and everyday work.",
-      "Bring your digital essentials together — with the right tools, access, and structure, all in one place.",
+      "If a spreadsheet is doing too much, it’s time for a proper tool",
+      "Stop calculating the same numbers over and over",
+      "Build exactly the tool your business needs, nothing more and nothing less",
+      "Turn one frustrating workflow into one simple app",
     ],
-    elements: ["INTERNAL PORTALS", "TRACKERS", "CUSTOM WORKFLOWS"],
+    elements: ["TRACKERS", "CALCULATORS", "INTERNAL APPS", "CUSTOM WORKFLOWS"],
   },
 ];
 
@@ -193,28 +199,28 @@ export default function Solutions() {
               <div className="relative flex items-center pl-6 sm:pl-8 mb-6">
                 <div className="absolute left-[29px] sm:left-[37px] w-[2px] bg-white/30 animate-flow-1 z-0 rounded-full"></div>
                 <div className="shrink-0 w-[12px] h-[12px] rounded-full border-[2px] border-white/30 bg-flownex-black z-10 relative"></div>
-                <p className="ml-5 text-flownex-white/90 text-base sm:text-[17px]">Your business has everything it needs.</p>
+                <p className="ml-5 text-flownex-white/90 text-base sm:text-[17px]">Your business has everything it needs</p>
               </div>
 
               {/* Item 2 */}
               <div className="relative flex items-center pl-6 sm:pl-8 mb-6">
                 <div className="absolute left-[29px] sm:left-[37px] w-[2px] bg-white/30 animate-flow-2 z-0 rounded-full"></div>
                 <div className="shrink-0 w-[12px] h-[12px] rounded-full border-[2px] border-white/30 bg-flownex-black z-10 relative"></div>
-                <p className="ml-5 text-flownex-white/90 text-base sm:text-[17px]">It's just scattered everywhere.</p>
+                <p className="ml-5 text-flownex-white/90 text-base sm:text-[17px]">It's just scattered everywhere</p>
               </div>
 
               {/* Item 3 */}
               <div className="relative flex items-center pl-6 sm:pl-8 mb-6">
                 <div className="absolute left-[29px] sm:left-[37px] w-[2px] animate-flow-3 z-0 rounded-full" style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.3) 50%, #ff2a6d 100%)' }}></div>
                 <div className="shrink-0 w-[12px] h-[12px] rounded-full border-[2px] border-white/30 bg-flownex-black z-10 relative"></div>
-                <p className="ml-5 text-flownex-white/90 text-base sm:text-[17px]">Scattered information slows work down.</p>
+                <p className="ml-5 text-flownex-white/90 text-base sm:text-[17px]">Scattered information slows work down</p>
               </div>
 
               {/* Item 4 */}
               <div className="relative flex items-center pl-6 sm:pl-8">
                 <div className="shrink-0 w-[12px] h-[12px] rounded-full bg-flownex-pink z-10 shadow-[0_0_10px_rgba(255,42,109,0.8)] relative"></div>
                 <h3 className="ml-5 text-flownex-white font-bold text-[22px] sm:text-[25px] leading-tight">
-                  We bring it all together.
+                  We bring it all together
                 </h3>
               </div>
             </div>
