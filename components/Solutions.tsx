@@ -323,29 +323,28 @@ export default function Solutions() {
                   </div>
 
                   {/* Fragment Badges */}
-                  <div className="pt-2 w-full max-w-full">
-                    {/* Hide scrollbar with CSS class or inline style, using a container that scrolls horizontally */}
-                    <div className="flex flex-nowrap items-start gap-3 overflow-x-auto pb-4 pr-4 hide-scrollbar" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-                      <style dangerouslySetInnerHTML={{ __html: `::-webkit-scrollbar { display: none; }` }} />
+                  <div className="pt-2">
+                    <div className="flex flex-wrap items-center gap-2.5">
                       {chap.elements.map((el, i) => (
-                        <div
-                          key={i}
-                          className={`group relative flex flex-col items-center rounded-3xl font-body text-xs tracking-wider transition-all duration-500 overflow-hidden shrink-0 ${
-                            isActive
-                              ? "bg-flownex-burgundy/90 text-flownex-white border border-flownex-pink/40 shadow-[0_0_15px_rgba(255,42,109,0.25)] hover:bg-flownex-burgundy hover:border-flownex-pink/70 hover:shadow-[0_0_20px_rgba(255,42,109,0.4)]"
-                              : "bg-white/5 text-flownex-white/40 border border-white/5"
-                          }`}
-                        >
-                          <div className={`px-4 py-2 font-semibold text-center whitespace-nowrap transition-all duration-300 group-hover:font-extrabold ${isActive ? "group-hover:text-flownex-pink" : ""}`}>
+                        <div key={i} className="group relative">
+                          <span
+                            className={`inline-block px-4 py-2 rounded-full font-body text-xs font-semibold tracking-wider transition-all duration-500 cursor-default ${
+                              isActive
+                                ? "bg-flownex-burgundy/90 text-flownex-white border border-flownex-pink/40 shadow-[0_0_15px_rgba(255,42,109,0.25)] hover:bg-flownex-burgundy hover:border-flownex-pink/70 hover:shadow-[0_0_20px_rgba(255,42,109,0.4)]"
+                                : "bg-white/5 text-flownex-white/40 border border-white/5"
+                            }`}
+                          >
                             {el.name}
-                          </div>
+                          </span>
                           
-                          {/* Expanded content area */}
-                          <div className="grid grid-rows-[0fr] opacity-0 group-hover:grid-rows-[1fr] group-hover:opacity-100 transition-all duration-500 ease-in-out px-4 w-full">
-                            <div className="overflow-hidden">
-                              <div className="pb-4 pt-1 text-xs leading-relaxed text-flownex-white/85 text-center font-normal normal-case tracking-normal whitespace-normal break-words w-[140px] mx-auto">
-                                {el.details}
-                              </div>
+                          {/* Hover Themed Card (PBI style tooltip) */}
+                          <div className="absolute left-1/2 -translate-x-1/2 top-full mt-3 w-[240px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 pointer-events-none -translate-y-2 group-hover:translate-y-0">
+                            {/* Card Background */}
+                            <div className="bg-[#151515]/95 backdrop-blur-md border border-flownex-pink/40 rounded-xl p-3.5 shadow-[0_10px_30px_rgba(0,0,0,0.5)] shadow-flownex-pink/15 relative">
+                              <p className="text-flownex-white/90 text-[13px] text-center font-light leading-relaxed normal-case tracking-normal">{el.details}</p>
+                              
+                              {/* Arrow pointing up */}
+                              <div className="absolute -top-[7px] left-1/2 -translate-x-1/2 w-3 h-3 bg-[#151515] border-t border-l border-flownex-pink/40 rotate-45"></div>
                             </div>
                           </div>
                         </div>
