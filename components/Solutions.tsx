@@ -17,7 +17,12 @@ const CHAPTERS = [
       "Set up how your team works, shares, and collaborates",
       "Put the right access and permissions in the right hands",
     ],
-    elements: ["MICROSOFT 365 SETUP", "FILE ORGANISATION", "TEAM COLLABORATION", "ACCESS & PERMISSIONS"],
+    elements: [
+      { name: "MICROSOFT 365 SETUP", details: "Configure Exchange, Teams, SharePoint, and OneDrive to create a unified ecosystem for your business." },
+      { name: "FILE ORGANISATION", details: "Design logical folder structures and naming conventions so files are always easy to find." },
+      { name: "TEAM COLLABORATION", details: "Set up channels, shared workspaces, and real-time co-authoring tools to keep teams aligned." },
+      { name: "ACCESS & PERMISSIONS", details: "Implement secure access controls, ensuring data is only available to the right people." }
+    ],
   },
   {
     num: "02",
@@ -31,7 +36,13 @@ const CHAPTERS = [
       "Take repetitive work off your team’s plate",
       "Get the reports you need, right when you need them",
     ],
-    elements: ["APPROVALS", "AUTOMATIONS", "NOTIFICATIONS", "TASKS & REMINDERS", "REPORTING"],
+    elements: [
+      { name: "APPROVALS", details: "Automate multi-step approval chains for expenses, leave requests, and document sign-offs." },
+      { name: "AUTOMATIONS", details: "Connect your apps to automatically transfer data and trigger actions without manual data entry." },
+      { name: "NOTIFICATIONS", details: "Set up smart alerts via Teams or email when important events happen or deadlines approach." },
+      { name: "TASKS & REMINDERS", details: "Auto-generate task lists for onboarding, projects, or recurring activities." },
+      { name: "REPORTING", details: "Schedule automated report generation and distribution so stakeholders are always informed." }
+    ],
   },
   {
     num: "03",
@@ -45,7 +56,13 @@ const CHAPTERS = [
       "Never let a follow-up depend on someone remembering",
       "Know exactly where every quotation stands, and what happens next",
     ],
-      elements: ["CRM", "LEAD MANAGEMENT", "SALES PIPELINE", "FOLLOW-UPS", "QUOTATIONS"],
+    elements: [
+      { name: "CRM", details: "Centralize customer data, communication history, and key contacts in one accessible platform." },
+      { name: "LEAD MANAGEMENT", details: "Capture leads automatically from your website and route them to the right sales reps." },
+      { name: "SALES PIPELINE", details: "Visualize your sales process with drag-and-drop boards to track deals at every stage." },
+      { name: "FOLLOW-UPS", details: "Automate follow-up reminders and email sequences to keep leads engaged." },
+      { name: "QUOTATIONS", details: "Generate professional, standardized quotes and track when they are opened or accepted." }
+    ],
   },
   {
     num: "04",
@@ -59,7 +76,12 @@ const CHAPTERS = [
       "Turn scattered business data into decisions you can act on",
       "Know what’s happening across your business, without digging through files",
     ],
-      elements: ["SALES DASHBOARDS", "FINANCE DASHBOARDS", "OPERATIONS DASHBOARDS", "MANAGEMENT KPIs"],
+    elements: [
+      { name: "SALES DASHBOARDS", details: "Track revenue, conversion rates, and sales rep performance in real-time." },
+      { name: "FINANCE DASHBOARDS", details: "Monitor cash flow, expenses, and profitability metrics at a glance." },
+      { name: "OPERATIONS DASHBOARDS", details: "Visualize project statuses, resource allocation, and operational bottlenecks." },
+      { name: "MANAGEMENT KPIs", details: "Consolidate high-level metrics into executive summaries for strategic decision-making." }
+    ],
   },
   {
     num: "05",
@@ -73,7 +95,12 @@ const CHAPTERS = [
       "Give your team instant answers from your company’s own knowledge",
       "Turn a blank page into a first draft in seconds",
     ],
-    elements: ["DOCUMENT AI", "SALES AI", "KNOWLEDGE AI", "CONTENT AI"],
+    elements: [
+      { name: "DOCUMENT AI", details: "Extract key data from invoices, contracts, and forms automatically." },
+      { name: "SALES AI", details: "Analyze sales calls for insights, sentiment, and action items." },
+      { name: "KNOWLEDGE AI", details: "Chat with your internal wikis and documents to get instant, accurate answers." },
+      { name: "CONTENT AI", details: "Draft emails, proposals, and marketing copy using AI trained on your brand voice." }
+    ],
   },
   {
     num: "06",
@@ -87,7 +114,12 @@ const CHAPTERS = [
       "Build exactly the tool your business needs, nothing more and nothing less",
       "Turn one frustrating workflow into one simple app",
     ],
-    elements: ["TRACKERS", "CALCULATORS", "INTERNAL APPS", "CUSTOM WORKFLOWS"],
+    elements: [
+      { name: "TRACKERS", details: "Custom databases and interfaces for tracking assets, inventory, or specialized processes." },
+      { name: "CALCULATORS", details: "Interactive tools for complex pricing, quotes, or ROI estimation." },
+      { name: "INTERNAL APPS", details: "Web and mobile apps built specifically for your employees' workflows." },
+      { name: "CUSTOM WORKFLOWS", details: "Bespoke automation logic bridging gaps between your unique software stack." }
+    ],
   },
 ];
 
@@ -291,19 +323,32 @@ export default function Solutions() {
                   </div>
 
                   {/* Fragment Badges */}
-                  <div className="pt-2">
-                    <div className="flex flex-wrap items-center gap-2.5">
+                  <div className="pt-2 w-full max-w-full">
+                    {/* Hide scrollbar with CSS class or inline style, using a container that scrolls horizontally */}
+                    <div className="flex flex-nowrap items-start gap-3 overflow-x-auto pb-4 pr-4 hide-scrollbar" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                      <style dangerouslySetInnerHTML={{ __html: `::-webkit-scrollbar { display: none; }` }} />
                       {chap.elements.map((el, i) => (
-                        <span
+                        <div
                           key={i}
-                          className={`px-4 py-2 rounded-full font-body text-xs font-semibold tracking-wider transition-all duration-500 ${
+                          className={`group relative flex flex-col items-center rounded-3xl font-body text-xs tracking-wider transition-all duration-500 overflow-hidden shrink-0 ${
                             isActive
-                              ? "bg-flownex-burgundy/90 text-flownex-white border border-flownex-pink/40 shadow-[0_0_15px_rgba(255,42,109,0.25)]"
+                              ? "bg-flownex-burgundy/90 text-flownex-white border border-flownex-pink/40 shadow-[0_0_15px_rgba(255,42,109,0.25)] hover:bg-flownex-burgundy hover:border-flownex-pink/70 hover:shadow-[0_0_20px_rgba(255,42,109,0.4)]"
                               : "bg-white/5 text-flownex-white/40 border border-white/5"
                           }`}
                         >
-                          {el}
-                        </span>
+                          <div className={`px-4 py-2 font-semibold text-center whitespace-nowrap transition-all duration-300 group-hover:font-extrabold ${isActive ? "group-hover:text-flownex-pink" : ""}`}>
+                            {el.name}
+                          </div>
+                          
+                          {/* Expanded content area */}
+                          <div className="grid grid-rows-[0fr] opacity-0 group-hover:grid-rows-[1fr] group-hover:opacity-100 transition-all duration-500 ease-in-out px-4 w-full">
+                            <div className="overflow-hidden">
+                              <div className="pb-4 pt-1 text-xs leading-relaxed text-flownex-white/85 text-center font-normal normal-case tracking-normal whitespace-normal break-words w-[140px] mx-auto">
+                                {el.details}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       ))}
                     </div>
                   </div>
