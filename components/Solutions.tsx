@@ -7,17 +7,17 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 const CHAPTERS = [
   {
     num: "01",
-    title: "DIGITAL BUSINESS SETUP",
+    title: "DIGITAL ECOSYSTEM IMPLEMENTATION",
     tagline: "STRUCTURE THE FOUNDATION",
     description:
       "We help businesses overcome scattered files and information, excessive reliance on manual communication through WhatsApp, email and phone calls, and disconnected digital tools by creating a structured, centralized digital workspace where information, communication and everyday operations are organized and connected.",
     points: [
-      "Bring your digital tools together in one connected workspace",
-      "Give every file and document a clear place to live",
-      "Turn manual requests into simple digital processes",
+      "Bring your essential digital tools into one connected workspace",
+      "Give every file and document a clear, organised home",
+      "Set up how your team works, shares, and collaborates",
       "Put the right access and permissions in the right hands",
     ],
-    elements: ["MICROSOFT 365", "DOCUMENTS", "DIGITAL FORMS", "ACCESS & PERMISSIONS", "COLLABORATION"],
+    elements: ["MICROSOFT 365 SETUP", "FILE ORGANISATION", "TEAM COLLABORATION", "ACCESS & PERMISSIONS"],
   },
   {
     num: "02",
@@ -29,7 +29,7 @@ const CHAPTERS = [
       "Stop chasing approvals. Let the workflow do the chasing",
       "Keep every deadline, task, and follow-up on track",
       "Take repetitive work off your team’s plate",
-      "Get the reports you need, right when you need <them></them>",
+      "Get the reports you need, right when you need them",
     ],
     elements: ["APPROVALS", "AUTOMATIONS", "NOTIFICATIONS", "TASKS & REMINDERS", "REPORTING"],
   },
@@ -202,7 +202,7 @@ export default function Solutions() {
               <div className="relative flex items-center pl-6 sm:pl-8 mb-6">
                 <div className="absolute left-[29px] sm:left-[37px] w-[2px] bg-white/30 animate-flow-1 z-0 rounded-full"></div>
                 <div className="shrink-0 w-[12px] h-[12px] rounded-full border-[2px] border-white/30 bg-flownex-black z-10 relative"></div>
-                <p className="ml-5 text-flownex-white/90 text-base sm:text-[17px]">Your business has everything it needs</p>
+                <p className="ml-5 text-flownex-white/90 text-base sm:text-[17px]">Your business has information everywhere</p>
               </div>
 
               {/* Item 2 */}
