@@ -18,7 +18,7 @@ const CHAPTERS = [
       "Put the right access and permissions in the right hands",
     ],
     elements: [
-      { name: "MICROSOFT 365 SETUP", details: "Configure Exchange, Teams, SharePoint, and OneDrive to create a unified ecosystem for your business." },
+      { name: "WORKSPACE SETUP", details: "Entire Microsoft 365 or Google Workspace setup" },
       { name: "FILE ORGANISATION", details: "Design logical folder structures and naming conventions so files are always easy to find." },
       { name: "TEAM COLLABORATION", details: "Set up channels, shared workspaces, and real-time co-authoring tools to keep teams aligned." },
       { name: "ACCESS & PERMISSIONS", details: "Implement secure access controls, ensuring data is only available to the right people." }
@@ -338,13 +338,13 @@ export default function Solutions() {
                           </span>
                           
                           {/* Hover Themed Card (PBI style tooltip) */}
-                          <div className="absolute left-1/2 -translate-x-1/2 top-full mt-3 w-[240px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 pointer-events-none -translate-y-2 group-hover:translate-y-0">
+                          <div className="absolute left-0 top-full mt-3 w-[240px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 pointer-events-none -translate-y-2 group-hover:translate-y-0">
                             {/* Card Background */}
-                            <div className="bg-[#151515]/95 backdrop-blur-md border border-flownex-pink/40 rounded-xl p-3.5 shadow-[0_10px_30px_rgba(0,0,0,0.5)] shadow-flownex-pink/15 relative">
-                              <p className="text-flownex-white/90 text-[13px] text-center font-light leading-relaxed normal-case tracking-normal">{el.details}</p>
+                            <div className="bg-[#151515]/95 backdrop-blur-md border border-flownex-pink/40 rounded-xl p-4 shadow-[0_10px_30px_rgba(0,0,0,0.5)] shadow-flownex-pink/15 relative">
+                              <p className="text-flownex-white/90 text-[13px] text-left font-light leading-relaxed normal-case tracking-normal">{el.details}</p>
                               
                               {/* Arrow pointing up */}
-                              <div className="absolute -top-[7px] left-1/2 -translate-x-1/2 w-3 h-3 bg-[#151515] border-t border-l border-flownex-pink/40 rotate-45"></div>
+                              <div className="absolute -top-[7px] left-8 w-3 h-3 bg-[#151515] border-t border-l border-flownex-pink/40 rotate-45"></div>
                             </div>
                           </div>
                         </div>
